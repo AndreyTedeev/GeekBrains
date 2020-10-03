@@ -1,0 +1,52 @@
+<meta charset="utf-8">
+<script type="text/javascript">
+
+/* 
+  ТЕДЕЕВ АНДРЕЙ 
+  17.08.2020
+
+  2. Подсчет площади трапеции.
+  Пользователь вводит длину оснований трапеции (a и b), 
+  а также высоту трапеции h. Программа выводит сообщение: 
+  «Площадь трапеции будет равна <значение>». 
+  Площадь вычисляется по формуле ((a + b) / 2) * h, 
+  где a, b - основания, h - высота.
+*/
+	
+   function prompt4Digit(message) {
+      var promptString, result, error;
+ 
+      do {
+         promptString = prompt(message);
+         result = parseInt(promptString);
+         error = isNaN(result);
+         if (error)
+            alert (
+             "Введенное значение должно быть числом." +
+             "\nНапример 123" +
+             "\nВы ввели: " +  promptString +
+             "\nПопробуйте еще раз...");
+      }
+      while (error);
+
+      return result;
+   }
+
+   var lengthA = prompt4Digit(
+       "Введите длину основания трапеции А" +
+       "\n Например 12");
+
+   var lengthB = prompt4Digit(
+       "Введите длину основания трапеции B" +
+       "\n Например 23");
+
+   var height = prompt4Digit(
+       "Введите высоту трапеции " +
+       "\n Например 34");
+
+   var area = ((lengthA + lengthB) / 2) * height;
+
+   alert(
+      "Площадь трапеции будет равна " + area + ".");
+
+</script>

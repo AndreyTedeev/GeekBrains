@@ -1,0 +1,51 @@
+﻿<meta charset="utf-8" />
+<script type="text/javascript">
+    /*
+        ТЕДЕЕВ АНДРЕЙ
+        18.08.2020
+
+        2. Банковская программа.
+        Пользователь вводит сумму вклада и процент, который будет начисляться ежегодно. 
+        Отобразить размер вклада поочередно на ближайшие 5 лет.
+
+     */
+
+    function prompt4Digit(message) {
+
+        var promptString, result, error;
+
+        do {
+            promptString = prompt(message);
+            result = parseInt(promptString);
+            error = isNaN(result) || (result < 0);
+            if (error)
+                alert(
+                    "Введенное значение должно быть положительным числом." +
+                    "\nНапример 123" +
+                    "\nВы ввели: " + promptString +
+                    "\nПопробуйте еще раз...");
+        }
+        while (error);
+
+        return result;
+    }
+
+    var deposit = prompt4Digit(
+        "Введите сумму вклада" +
+        "\n Например 1234");
+
+    var percent = prompt4Digit(
+        "Введите процент, который будет начисляться ежегодно" +
+        "\n Например 10");
+
+    var years = 5;
+
+    document.write("Размер вклада поочередно на ближайшие " + years + " лет<br>");
+    document.write("Начальный вклад : " + deposit + " под " + percent + " процентов годовых<br>");
+
+    for (var i = 0; i < years; i++) {
+        deposit += deposit * percent / 100
+        document.write("Год " + (i + 1) + " : " + deposit.toFixed(2) + "<br>");
+    };
+    
+</script>

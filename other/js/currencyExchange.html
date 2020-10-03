@@ -1,0 +1,48 @@
+<meta charset="utf-8">
+<script type="text/javascript">
+
+/* 
+  ТЕДЕЕВ АНДРЕЙ 
+  17.08.2020
+
+  1. Конвертер валют.
+  Программа хранит в двух переменных курс доллара и евро. В 
+  первой переменной у вас хранится стоимость одного евро в 
+  рублях, во второй - стоимость одного доллара в рублях. Вы 
+  спрашиваете у пользователя, сколько рублей он хочет 
+  сконвертировать, получаете это число и считаете. 
+  Результат надо вывести на страницу с помощью alert.
+*/
+	
+   var euro2Rub = 74.01;
+   var dollar2Rub = 65.20;
+
+   var promptMessage = 
+      "Cколько рублей Вы хотите сконвертировать?" +
+   	  "\nНапример 1045.45";
+   
+   var promptRub, amountRub, error;
+
+   do {
+      promptRub = prompt(promptMessage);
+      amountRub = parseInt(promptRub);
+      error = isNaN(amountRub);
+      if (error)
+         alert (
+         	"Cумма в рублях должна быть числом." +
+         	"\nНапример 1234.65" +
+         	"\nВы ввели: " +  promptRub +
+         	"\nПопробуйте еще раз...");
+   }
+   while (error);
+   
+   var amountEuro = amountRub / euro2Rub;
+   var amountDollar = amountRub / dollar2Rub;
+
+   var result = 
+      "Результат конвертации " + amountRub + " RUB:" +
+      "\nEU " + amountEuro.toFixed(2) + " или $  " + amountDollar.toFixed(2);
+   
+   alert(result);
+
+</script>
