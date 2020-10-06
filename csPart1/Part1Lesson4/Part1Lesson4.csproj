@@ -3,11 +3,11 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>AndreyTedeev.Part1Lesson3</RootNamespace>
+    <RootNamespace>AndreyTedeev.Part1Lesson4</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Library\Library.csproj" />
+    <ProjectReference Include="..\..\Library\Library.csproj" />
   </ItemGroup>
 
 </Project>
