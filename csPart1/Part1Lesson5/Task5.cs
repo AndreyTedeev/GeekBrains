@@ -33,7 +33,7 @@ namespace AndreyTedeev.Part1Lesson5
             int count = 5, total = 0, randomQuestion;
             for (int i = 0; i < count; i++)
             {
-                randomQuestion = random.Next(1, data.Length);
+                randomQuestion = random.Next(1, data.Length-1);
                 total += AskQuestion(data[randomQuestion]);
             }
             Console.WriteLine($"\nВы набрали {total} баллов.\n");
