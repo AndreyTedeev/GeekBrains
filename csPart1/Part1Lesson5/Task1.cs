@@ -21,7 +21,7 @@ namespace AndreyTedeev.Part1Lesson5
             Console.WriteLine($"Результат проверки без RegEx: {CheckLogin(s)}");
             
             Regex regex = new Regex("^[a-zA-Z][a-zA-Z0-9]{1,9}$");
-            Console.WriteLine($"Результат проверки c RegEx: {regex.IsMatch(s)}");
+            Console.WriteLine($"Результат проверки c RegEx: {regex.IsMatch(s)}\n");
         }
 
         /// <summary>

@@ -12,7 +12,8 @@ namespace AndreyTedeev.Part1Lesson5
 
             IAbstractTask[] tasks = {
                 new Task1(),
-                new Task2()
+                new Task2(),
+                new Task3()
             };
 
             foreach (IAbstractTask task in tasks)
