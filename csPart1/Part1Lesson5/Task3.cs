@@ -20,6 +20,7 @@ namespace AndreyTedeev.Part1Lesson5
             TestPermutation("bla12bla", "21aabbll");
             TestPermutation("дорога", "города");
             TestPermutation("привет", "припев");
+            Console.WriteLine();
         }
 
         /// <summary>
@@ -29,17 +30,37 @@ namespace AndreyTedeev.Part1Lesson5
         /// <param name="b"></param>
         public void TestPermutation(string a, string b)
         {
-            bool check = IsPermutation(a, b);
-            Console.Write($"Проверяем на перестановку строки '{a}' и '{b}' : {check}\n");
+            bool check1 = IsPermutation_1(a, b);
+            bool check2 = IsPermutation_2(a, b);
+            Console.Write($"Проверяем на перестановку строки '{a}' и '{b}' : {check1} {check2}\n");
         }
 
         /// <summary>
         /// Является ли одна строка перестановкой другой
+        /// Метод сортировки
         /// </summary>
         /// <param name="a"></param>
         /// <param name="b"></param>
         /// <returns></returns>
-        private bool IsPermutation(string a, string b)
+        private bool IsPermutation_1(string a, string b)
+        {
+            char[] ca = a.ToCharArray();
+            char[] cb = b.ToCharArray();
+            Array.Sort(ca);
+            Array.Sort(cb);
+            string sa = new string(ca);
+            string sb = new string(cb);
+            return sa.Equals(sb);
+        }
+
+        /// <summary>
+        /// Является ли одна строка перестановкой другой
+        /// Мой метод сравнения ключей
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        private bool IsPermutation_2(string a, string b)
         {
             if (a.Length != b.Length)
                 return false;
