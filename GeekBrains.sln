@@ -3,19 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30503.244
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library", "Library\Library.csproj", "{35486E12-00FB-4765-922C-44C99726F319}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library", "Library\Library.csproj", "{35486E12-00FB-4765-922C-44C99726F319}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "csPart1", "csPart1", "{A59E7872-7D55-4DC2-8EBD-13B2BFDB4FAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Part1Lesson4", "csPart1\Part1Lesson4\Part1Lesson4.csproj", "{BE4558D2-9F91-4E5C-B557-F1BC30072D0E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Part1Lesson4", "csPart1\Part1Lesson4\Part1Lesson4.csproj", "{BE4558D2-9F91-4E5C-B557-F1BC30072D0E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Part1Lesson3", "csPart1\Part1Lesson3\Part1Lesson3.csproj", "{4AE84687-1D63-4159-9CC4-F7016529894D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Part1Lesson3", "csPart1\Part1Lesson3\Part1Lesson3.csproj", "{4AE84687-1D63-4159-9CC4-F7016529894D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Part1Lesson2", "csPart1\Part1Lesson2\Part1Lesson2.csproj", "{FAA39122-43AC-4E0A-ADA7-325B76EC6D6C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Part1Lesson2", "csPart1\Part1Lesson2\Part1Lesson2.csproj", "{FAA39122-43AC-4E0A-ADA7-325B76EC6D6C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Part1Lesson1", "csPart1\Part1Lesson1\Part1Lesson1.csproj", "{95918EDF-ABA5-4BA2-A2B2-F7D14998D348}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Part1Lesson1", "csPart1\Part1Lesson1\Part1Lesson1.csproj", "{95918EDF-ABA5-4BA2-A2B2-F7D14998D348}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Part1Lesson5", "csPart1\Part1Lesson5\Part1Lesson5.csproj", "{0241D31A-5760-4F59-B3BA-87EB30E7500B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Part1Lesson5", "csPart1\Part1Lesson5\Part1Lesson5.csproj", "{0241D31A-5760-4F59-B3BA-87EB30E7500B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Part1Lesson6", "csPart1\Part1Lesson6\Part1Lesson6.csproj", "{C0804BBB-6478-4AE0-B32D-1ED2F504A43E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,12 +49,13 @@ Global
 		{0241D31A-5760-4F59-B3BA-87EB30E7500B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0241D31A-5760-4F59-B3BA-87EB30E7500B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0241D31A-5760-4F59-B3BA-87EB30E7500B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0804BBB-6478-4AE0-B32D-1ED2F504A43E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0804BBB-6478-4AE0-B32D-1ED2F504A43E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0804BBB-6478-4AE0-B32D-1ED2F504A43E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0804BBB-6478-4AE0-B32D-1ED2F504A43E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {6C24DD34-56BB-4342-B6B0-FA2D9047439D}
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{BE4558D2-9F91-4E5C-B557-F1BC30072D0E} = {A59E7872-7D55-4DC2-8EBD-13B2BFDB4FAF}
@@ -60,5 +63,9 @@ Global
 		{FAA39122-43AC-4E0A-ADA7-325B76EC6D6C} = {A59E7872-7D55-4DC2-8EBD-13B2BFDB4FAF}
 		{95918EDF-ABA5-4BA2-A2B2-F7D14998D348} = {A59E7872-7D55-4DC2-8EBD-13B2BFDB4FAF}
 		{0241D31A-5760-4F59-B3BA-87EB30E7500B} = {A59E7872-7D55-4DC2-8EBD-13B2BFDB4FAF}
+		{C0804BBB-6478-4AE0-B32D-1ED2F504A43E} = {A59E7872-7D55-4DC2-8EBD-13B2BFDB4FAF}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6C24DD34-56BB-4342-B6B0-FA2D9047439D}
 	EndGlobalSection
 EndGlobal

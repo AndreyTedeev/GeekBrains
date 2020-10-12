@@ -28,7 +28,7 @@ namespace AndreyTedeev.Part1Lesson5
                 return;
             }
 
-            Console.WriteLine($"Начнем игру...\nБудет 5 вопросов на которые нжно ответить {StaticQuestion}\n");
+            Console.WriteLine($"Начнем игру...\nБудет 5 вопросов на которые нужно ответить {StaticQuestion}\n");
             Random random = new Random();
             int count = 5, total = 0, randomQuestion;
             for (int i = 0; i < count; i++)
