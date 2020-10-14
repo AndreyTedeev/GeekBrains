@@ -72,16 +72,12 @@ namespace AndreyTedeev
 
         public static int AskIntForever(string message)
         {
-            bool success;
+            Console.WriteLine(message);
             int result;
-            do
+            while (!int.TryParse(Console.ReadLine(), out result))
             {
-                Console.Write(message);
-                success = int.TryParse(Console.ReadLine(), out result);
-                if (!success)
-                    Console.WriteLine("Неверные данные. Попробуйте еще раз...");
+                Console.WriteLine("ОШИБКА! Введите число.");
             }
-            while (!success);
             return result;
         }
 

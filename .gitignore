@@ -1,4 +1,5 @@
 .vscode
+*.code-workspace
 accounts.txt
 MyCollection.txt
 MyGrid.txt
