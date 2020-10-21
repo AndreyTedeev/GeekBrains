@@ -25,7 +25,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "algo", "algo", "{918D387D-6
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lesson1", "algo\Lesson1\Lesson1.vcxproj", "{7727D7F0-8CB8-4A65-A15C-EED80C03FD15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Part1Lesson8", "csPart1\Part1Lesson8\Part1Lesson8.csproj", "{722DC661-C7C6-43CD-A8E8-4BF1E3F49771}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Part1Lesson8", "csPart1\Part1Lesson8\Part1Lesson8.csproj", "{722DC661-C7C6-43CD-A8E8-4BF1E3F49771}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
