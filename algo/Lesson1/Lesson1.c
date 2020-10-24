@@ -3,6 +3,6 @@
 int main(int argc, const char* argv[])
 {
 	printf("Hello, World!\n");
-	getchar();
-	return 0;
+	int c = getchar();
+	return c;
 }
