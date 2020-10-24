@@ -1,12 +1,18 @@
-﻿using System;
+﻿using System.Windows.Forms;
 
-namespace Asteroids
+namespace AndreyTedeev.Asteroids
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Form form = new Form();
+            form.Width = 800;
+            form.Height = 600;
+            Game.Init(form);
+            form.Show();
+            Game.Draw();
+            Application.Run(form);
         }
     }
 }
