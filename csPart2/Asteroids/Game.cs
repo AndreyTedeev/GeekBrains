@@ -50,14 +50,22 @@ namespace AndreyTedeev.Asteroids
             Draw();
         }
 
-        private static Star RandomStar() {
-            Point p = new Point(Random.Next(1, Width), Random.Next(1, Height));
-            return new Star(p, new Point(-(Random.Next(5,10)), 0), new Size(3, 3));
-        }        
+        private static Star RandomStar()
+        {
+            Point pos = new Point(Random.Next(1, Width), Random.Next(1, Height));
+            Point dir = new Point(-(Random.Next(5, 10)), 0);
+            Size size = new Size(Random.Next(3, 5), Random.Next(2, 4));
+            Color color = Color.FromArgb(
+                Random.Next(0, byte.MaxValue),
+                Random.Next(0, byte.MaxValue),
+                Random.Next(0, byte.MaxValue)
+            );
+            return new Star(pos, dir, size, color);
+        }
 
         static public void Load()
         {
-            _data = new BaseObject[100];
+            _data = new BaseObject[200];
             for (int i = 0; i < _data.Length; i++)
                 _data[i] = RandomStar();
         }
@@ -66,7 +74,7 @@ namespace AndreyTedeev.Asteroids
         {
             Buffer.Graphics.DrawImage(_background, 0, 0);
             foreach (BaseObject obj in _data)
-                 obj.Draw();
+                obj.Draw();
             Buffer.Render();
         }
 
@@ -76,5 +84,5 @@ namespace AndreyTedeev.Asteroids
                 obj.Update();
         }
     }
-    
+
 }

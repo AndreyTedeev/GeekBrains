@@ -4,14 +4,17 @@ namespace AndreyTedeev.Asteroids.Data
 {
     class Star : BaseObject
     {
-        public Star(Point pos, Point dir, Size size) : base(pos, dir, size)
+        private Color _color;
+
+        public Star(Point pos, Point dir, Size size, Color color) : base(pos, dir, size)
         {
+            _color = color;
         }
 
         public override void Draw()
         {
             Game.Buffer.Graphics.FillEllipse(
-                Brushes.White, 
+                new SolidBrush(_color), 
                 new Rectangle(Pos, Size));
         }
 
