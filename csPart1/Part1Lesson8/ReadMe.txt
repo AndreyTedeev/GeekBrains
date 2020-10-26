@@ -1,4 +1,4 @@
-﻿Andrey Tedeev <me@andreytedeev.ru>
+﻿Andrey Tedeev <andrey.tedeev@outlook.com>
 Домашнее задание "Основы языка C#, Урок 8"
 
 1. а) Создать приложение, показанное на уроке, добавив в него защиту от возможных ошибок 

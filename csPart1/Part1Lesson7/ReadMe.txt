@@ -1,4 +1,4 @@
-﻿Andrey Tedeev <me@andreytedeev.ru>
+﻿Andrey Tedeev <andrey.tedeev@outlook.com>
 Домашнее задание "Основы языка C#, Урок 7"
 
 1. а) Добавить в программу «Удвоитель» подсчет количества отданных команд.
