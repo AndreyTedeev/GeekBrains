@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "csPart2", "csPart2", "{197C
 		csPart2\ReadMe.txt = csPart2\ReadMe.txt
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Asteroids", "csPart2\Asteroids\Asteroids.csproj", "{C18C5A93-F91F-4627-A1B7-5537C3C11AFD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,12 +42,33 @@ Global
 		{7727D7F0-8CB8-4A65-A15C-EED80C03FD15}.Release|x64.Build.0 = Release|x64
 		{7727D7F0-8CB8-4A65-A15C-EED80C03FD15}.Release|x86.ActiveCfg = Release|Win32
 		{7727D7F0-8CB8-4A65-A15C-EED80C03FD15}.Release|x86.Build.0 = Release|Win32
+		{C18C5A93-F91F-4627-A1B7-5537C3C11AFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C18C5A93-F91F-4627-A1B7-5537C3C11AFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C18C5A93-F91F-4627-A1B7-5537C3C11AFD}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{C18C5A93-F91F-4627-A1B7-5537C3C11AFD}.Debug|ARM.Build.0 = Debug|Any CPU
+		{C18C5A93-F91F-4627-A1B7-5537C3C11AFD}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{C18C5A93-F91F-4627-A1B7-5537C3C11AFD}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{C18C5A93-F91F-4627-A1B7-5537C3C11AFD}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C18C5A93-F91F-4627-A1B7-5537C3C11AFD}.Debug|x64.Build.0 = Debug|Any CPU
+		{C18C5A93-F91F-4627-A1B7-5537C3C11AFD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C18C5A93-F91F-4627-A1B7-5537C3C11AFD}.Debug|x86.Build.0 = Debug|Any CPU
+		{C18C5A93-F91F-4627-A1B7-5537C3C11AFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C18C5A93-F91F-4627-A1B7-5537C3C11AFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C18C5A93-F91F-4627-A1B7-5537C3C11AFD}.Release|ARM.ActiveCfg = Release|Any CPU
+		{C18C5A93-F91F-4627-A1B7-5537C3C11AFD}.Release|ARM.Build.0 = Release|Any CPU
+		{C18C5A93-F91F-4627-A1B7-5537C3C11AFD}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{C18C5A93-F91F-4627-A1B7-5537C3C11AFD}.Release|ARM64.Build.0 = Release|Any CPU
+		{C18C5A93-F91F-4627-A1B7-5537C3C11AFD}.Release|x64.ActiveCfg = Release|Any CPU
+		{C18C5A93-F91F-4627-A1B7-5537C3C11AFD}.Release|x64.Build.0 = Release|Any CPU
+		{C18C5A93-F91F-4627-A1B7-5537C3C11AFD}.Release|x86.ActiveCfg = Release|Any CPU
+		{C18C5A93-F91F-4627-A1B7-5537C3C11AFD}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{7727D7F0-8CB8-4A65-A15C-EED80C03FD15} = {918D387D-6B85-4AE6-81F9-4DC2EFF28DB5}
+		{C18C5A93-F91F-4627-A1B7-5537C3C11AFD} = {197C27C0-135F-11EB-9DE6-6B05BFC8A03A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6C24DD34-56BB-4342-B6B0-FA2D9047439D}
