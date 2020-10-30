@@ -23,7 +23,7 @@ namespace Lesson2
                 if (i % 2 == 0)
                     data[i] = new MonthlyWorker(name, random.Next(50_000, 99_999));
                 else
-                    data[i] = new HourlyWorker(name, random.Next(300, 800));
+                    data[i] = new HourlyWorker(name, random.Next(300, 600));
             }
             return data;
         }
