@@ -98,6 +98,7 @@ namespace AndreyTedeev.Asteroids
                 _data.Add(new Star());
             for (int i = 0; i < _asteroidCount; i++)
                 _data.Add(new Asteroid());
+            _data.Add(new MedKit());
             _ship = new Ship();
         }
 
@@ -135,6 +136,8 @@ namespace AndreyTedeev.Asteroids
                 _data.Remove(obj);
                 if (obj is Asteroid)
                     _data.Add(new Asteroid());
+                if (obj is MedKit)
+                    _data.Add(new MedKit());
             }
             _finished.Clear();
         }
