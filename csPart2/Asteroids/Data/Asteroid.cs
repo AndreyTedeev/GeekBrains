@@ -7,7 +7,7 @@ namespace AndreyTedeev.Asteroids.Data
 
         public Asteroid() : base()
         {
-            _dir = new Point(-(Game.Random.Next(15, 30)), 0);
+            _dir = new Point(-(Game.Random.Next(10, 20)), 0);
             _bounds = new Rectangle(
                 new Point(
                     Game.Width,

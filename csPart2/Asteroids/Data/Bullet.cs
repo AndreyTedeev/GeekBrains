@@ -12,6 +12,13 @@ namespace AndreyTedeev.Asteroids.Data
             _color = color;
         }
 
+        public Bullet(Point pos) : base()
+        {
+            _bounds = new Rectangle(pos, new Size(12, 4));
+            _dir = new Point(15, 0);
+            _color = Color.Red;
+        }
+
         public Bullet() : base()
         {
             _bounds = new Rectangle(
