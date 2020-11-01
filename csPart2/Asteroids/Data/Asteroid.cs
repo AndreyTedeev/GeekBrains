@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 
 namespace AndreyTedeev.Asteroids.Data
 {
@@ -24,7 +18,7 @@ namespace AndreyTedeev.Asteroids.Data
 
         private static Image _image = null;
 
-        protected override Image Image => _image ?? LoadImageAndResize("Resources\\asteroid.png", 64 ,64);
+        protected override Image Image => _image ??= LoadImageAndResize("Resources\\asteroid.png", 64 ,64);
 
         public override void Update()
         {

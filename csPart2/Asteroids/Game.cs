@@ -21,6 +21,7 @@ namespace AndreyTedeev.Asteroids
         static int _asteroidCount = 10;
         static List<BaseObject> _data;
         static List<BaseObject> _finished = new List<BaseObject>();
+        static Ship _ship;
         #endregion
 
         static Game()
@@ -60,6 +61,7 @@ namespace AndreyTedeev.Asteroids
                 _data.Add(new Star());
             for (int i = 0; i < _asteroidCount; i++)
                 _data.Add(new Asteroid());
+            _ship = new Ship();
             for (int i = 0; i < 5; i++)
                 _data.Add(new Bullet());
         }
@@ -71,6 +73,7 @@ namespace AndreyTedeev.Asteroids
             {
                 obj.Draw();
             }
+            _ship.Draw();
             Buffer.Render();
         }
 
@@ -89,6 +92,7 @@ namespace AndreyTedeev.Asteroids
                     _finished.Add(obj);
                 }
             }
+            _ship.Update();
             foreach (BaseObject obj in _finished) {
                 _data.Remove(obj);
                 if (obj is Asteroid)
