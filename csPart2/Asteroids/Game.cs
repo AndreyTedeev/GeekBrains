@@ -44,6 +44,8 @@ namespace AndreyTedeev.Asteroids
         static List<BaseObject> _finished = new List<BaseObject>();
         static Ship _ship;
         static int _score = 0;
+        static int _lives = 5;
+        static Form _form;
         #endregion
 
         static Game()
@@ -53,6 +55,7 @@ namespace AndreyTedeev.Asteroids
 
         static public void Init(Form form)
         {
+            _form = form;
             // Графическое устройство для вывода графики            
             Graphics g;
             // предоставляет доступ к главному буферу графического контекста для текущего приложения
@@ -89,6 +92,8 @@ namespace AndreyTedeev.Asteroids
         {
             Update();
             Draw();
+            if (_lives == 0)
+                GameOver();
         }
 
         static public void Load()
@@ -105,7 +110,8 @@ namespace AndreyTedeev.Asteroids
         static public void Draw()
         {
             Buffer.Graphics.DrawImage(_background, 0, 0);
-            Buffer.Graphics.DrawString($"SCORE: {_score:####0}", SystemFonts.DefaultFont, Brushes.White, new Point(0, 0));
+            Buffer.Graphics.DrawString(
+                $"SCORE: {_score:####0}    LIVES: {_lives:####0}", SystemFonts.DefaultFont, Brushes.White, new Point(0, 0));
             foreach (BaseObject obj in _data)
             {
                 obj.Draw();
@@ -131,6 +137,8 @@ namespace AndreyTedeev.Asteroids
                 }
             }
             _ship.Update();
+            ShipCollision(_ship);
+            
             foreach (BaseObject obj in _finished)
             {
                 _data.Remove(obj);
@@ -140,6 +148,15 @@ namespace AndreyTedeev.Asteroids
                     _data.Add(new MedKit());
             }
             _finished.Clear();
+            
+        }
+
+        private static void GameOver()
+        {
+            _timer.Stop();
+            MessageBox.Show("GAME OVER");
+            _form.Close();
+            
         }
 
         private static void BulletCollision(Bullet bullet)
@@ -154,6 +171,22 @@ namespace AndreyTedeev.Asteroids
                     _finished.Add(obj);
                     _finished.Add(bullet);
                     return;
+                }
+            }
+        }
+
+        private static void ShipCollision(Ship ship) {
+            foreach (BaseObject obj in _data)
+            {
+                if (obj is Star)
+                    continue;
+                else if (ship.Collision(obj))
+                {
+                    if (obj is Asteroid)
+                        _lives--;
+                    else if (obj is MedKit)
+                        _lives++;
+                    _finished.Add(obj);
                 }
             }
         }
