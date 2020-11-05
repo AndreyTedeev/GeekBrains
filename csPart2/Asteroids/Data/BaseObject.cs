@@ -1,25 +1,50 @@
+using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace AndreyTedeev.Asteroids.Data
 {
-    public class BaseObject
-    {
-        protected Point _pos, _dir;
-        protected Size _sz;
 
-        public Point Pos { get => _pos; set => _pos = value; }
+    public interface ICollision
+    {
+        Rectangle Bounds();
+        bool Collision(ICollision other);
+    }
+
+    abstract class BaseObject : ICollision
+    {
+        protected Point _dir;
+        protected Rectangle _bounds;
+        protected bool _finished = false;
+
+        public abstract void Draw();
+
+        public abstract void Update();
+
         public Point Dir { get => _dir; set => _dir = value; }
-        public Size Size { get => _sz; set => _sz = value; }
+
+        public bool IsFinished { get => _finished; }
+
+        public BaseObject() 
+        { 
+        }
 
         public BaseObject(Point pos, Point dir, Size size)
         {
-            _pos = pos;
             _dir = dir;
-            _sz = size;
+            _bounds = new Rectangle(pos, size);
         }
-        public virtual void Draw() {}
 
-        public virtual void Update() {}
+        public Rectangle Bounds()
+        {
+            return _bounds;
+        }
+
+        public bool Collision(ICollision other)
+        {
+            return other.Bounds().IntersectsWith(this.Bounds());
+        }
 
     }
+
 }

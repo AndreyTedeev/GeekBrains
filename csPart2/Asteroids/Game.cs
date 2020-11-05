@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using AndreyTedeev.Asteroids.Data;
 
@@ -12,12 +14,36 @@ namespace AndreyTedeev.Asteroids
         static BufferedGraphicsContext _context;
         static public BufferedGraphics Buffer { get; private set; }
         static public Random Random { get; } = new Random();
-        static public int Width { get; private set; }
-        static public int Height { get; private set; }
+        static int _width = 0;
+        static public int Width
+        {
+            get { return _width; }
+            private set
+            {
+                if ((value > 800) || (value < 0))
+                    throw new GameException("Wrong Width");
+                _width = value;
+            }
+        }
+        static int _height = 0;
+        static public int Height
+        {
+            get { return _height; }
+            private set
+            {
+                if ((value > 600) || (value < 0))
+                    throw new GameException("Wrong Height");
+                _height = value;
+            }
+        }
         static public Image _background = Image.FromFile("Resources\\back.jpg");
         static Timer _timer = new Timer();
-        //static int _speed
-        static BaseObject[] _data;
+        static int _starCount = 200;
+        static int _asteroidCount = 10;
+        static List<BaseObject> _data;
+        static List<BaseObject> _finished = new List<BaseObject>();
+        static Ship _ship;
+        static int _score = 0;
         #endregion
 
         static Game()
@@ -40,8 +66,23 @@ namespace AndreyTedeev.Asteroids
             Buffer = _context.Allocate(g, new Rectangle(0, 0, Width, Height));
             _timer.Interval = 100;
             _timer.Tick += Timer_Tick;
+            form.KeyDown += Form_KeyDown;
             _timer.Start();
             Load();
+        }
+
+        private static void Form_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Up)
+                _ship.MoveUp();
+            if (e.KeyCode == Keys.Down)
+                _ship.MoveDown();
+            if (e.KeyCode == Keys.Left)
+                _ship.MoveLeft();
+            if (e.KeyCode == Keys.Right)
+                _ship.MoveRight();
+            if (e.KeyCode == Keys.Space)
+                _data.Add(_ship.Fire());
         }
 
         private static void Timer_Tick(object sender, EventArgs e)
@@ -50,38 +91,71 @@ namespace AndreyTedeev.Asteroids
             Draw();
         }
 
-        private static Star RandomStar()
-        {
-            Point pos = new Point(Random.Next(1, Width), Random.Next(1, Height));
-            Point dir = new Point(-(Random.Next(5, 10)), 0);
-            Size size = new Size(Random.Next(3, 5), Random.Next(2, 4));
-            Color color = Color.FromArgb(
-                Random.Next(0, byte.MaxValue),
-                Random.Next(0, byte.MaxValue),
-                Random.Next(0, byte.MaxValue)
-            );
-            return new Star(pos, dir, size, color);
-        }
-
         static public void Load()
         {
-            _data = new BaseObject[200];
-            for (int i = 0; i < _data.Length; i++)
-                _data[i] = RandomStar();
+            _data = new List<BaseObject>();
+            for (int i = 0; i < _starCount; i++)
+                _data.Add(new Star());
+            for (int i = 0; i < _asteroidCount; i++)
+                _data.Add(new Asteroid());
+            _data.Add(new MedKit());
+            _ship = new Ship();
         }
 
         static public void Draw()
         {
             Buffer.Graphics.DrawImage(_background, 0, 0);
+            Buffer.Graphics.DrawString($"SCORE: {_score:####0}", SystemFonts.DefaultFont, Brushes.White, new Point(0, 0));
             foreach (BaseObject obj in _data)
+            {
                 obj.Draw();
+            }
+            _ship.Draw();
             Buffer.Render();
         }
 
         static public void Update()
         {
             foreach (BaseObject obj in _data)
+            {
                 obj.Update();
+                if (obj is Star)
+                    continue;
+                if (obj is Bullet)
+                {
+                    BulletCollision(obj as Bullet);
+                }
+                if (obj.IsFinished)
+                {
+                    _finished.Add(obj);
+                }
+            }
+            _ship.Update();
+            foreach (BaseObject obj in _finished)
+            {
+                _data.Remove(obj);
+                if (obj is Asteroid)
+                    _data.Add(new Asteroid());
+                if (obj is MedKit)
+                    _data.Add(new MedKit());
+            }
+            _finished.Clear();
+        }
+
+        private static void BulletCollision(Bullet bullet)
+        {
+            foreach (BaseObject obj in _data)
+            {
+                if ((obj is Star) || (bullet == obj))
+                    continue;
+                else if (bullet.Collision(obj))
+                {
+                    _score++;
+                    _finished.Add(obj);
+                    _finished.Add(bullet);
+                    return;
+                }
+            }
         }
     }
 
