@@ -1,3 +1,3 @@
-﻿Andrey Tedeev <andrey.tedeev@gmail.com>
+﻿Andrey Tedeev <andrey.tedeev@outlook.com>
 "Алгоритмы и структуры данных"
 

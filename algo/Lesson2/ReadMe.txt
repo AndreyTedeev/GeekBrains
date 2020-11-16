@@ -1,4 +1,4 @@
-Andrey Tedeev <andrey.tedeev@gmail.com>
+Andrey Tedeev <andrey.tedeev@outlook.com>
 "Алгоритмы и структуры данных"
 
 1. Реализовать функцию перевода из десятичной системы в двоичную, используя рекурсию.
