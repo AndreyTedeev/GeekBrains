@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-
 using WpfApp.View;
 
 namespace WpfApp.Data
@@ -18,9 +16,9 @@ namespace WpfApp.Data
         
         static string DepartmentFileName = "departments.json";
         
-        ObservableCollection<Employee> _employees = new ObservableCollection<Employee>();
-
-        ObservableCollection<Department> _departments = new ObservableCollection<Department>();
+        List<Employee> _employees = new List<Employee>();
+        
+        List<Department> _departments = new List<Department>();
 
         private DataBase()
         {}
@@ -32,9 +30,9 @@ namespace WpfApp.Data
             get => _dataBase ??= new DataBase();
         }
 
-        public ObservableCollection<Employee> Employees { get => _employees; }
+        public IEnumerable<Employee> Employees { get => _employees; }
 
-        public ObservableCollection<Department> Departments { get => _departments; }
+        public IEnumerable<Department> Departments { get => _departments; }
 
         public void Add(Department dept)
         {
@@ -67,12 +65,12 @@ namespace WpfApp.Data
             if (File.Exists(EmployeeFileName))
             {
                 jsonString = File.ReadAllText(EmployeeFileName);
-                _employees = JsonSerializer.Deserialize<ObservableCollection<Employee>>(jsonString);
+                _employees = JsonSerializer.Deserialize<List<Employee>>(jsonString);
             }
             if (File.Exists(DepartmentFileName))
             {
                 jsonString = File.ReadAllText(DepartmentFileName);
-                _departments = JsonSerializer.Deserialize<ObservableCollection<Department>>(jsonString);
+                _departments = JsonSerializer.Deserialize<List<Department>>(jsonString);
             }
         }
 

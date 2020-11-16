@@ -21,6 +21,7 @@ namespace WpfApp.View
         public DepartmentEditor()
         {
             InitializeComponent();
+            tbxName.Focus();
         }
 
         private void btnOk_Click(object sender, RoutedEventArgs e)
@@ -49,6 +50,7 @@ namespace WpfApp.View
                 result = false;
             if ((result != null) && (this.Parent is Window))
                 CloseDialog(this.Parent as Window, result);
+
         }
     }
 }

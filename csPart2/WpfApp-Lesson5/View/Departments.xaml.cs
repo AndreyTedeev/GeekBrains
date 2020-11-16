@@ -92,6 +92,11 @@ namespace WpfApp.View
 
         }
 
+        private void lvDepartments_Loaded(object sender, RoutedEventArgs e)
+        {
+            lvDepartments.ItemsSource = DataBase.Current.Departments;
+        }
+
         private void cmAdd_Click(object sender, RoutedEventArgs e)
         {
             NewDepartment();

@@ -5,7 +5,6 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Collections.ObjectModel;
 using WpfApp.Data;
 
 namespace WpfApp
@@ -26,9 +25,5 @@ namespace WpfApp
             DataBase.Current.Read();
             base.OnStartup(e);
         }
-
-        public ObservableCollection<Department> Departments { get => DataBase.Current.Departments;  }
-
-        public ObservableCollection<Employee> Employees { get => DataBase.Current.Employees; }
     }
 }
