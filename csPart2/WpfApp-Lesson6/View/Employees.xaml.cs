@@ -12,7 +12,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfApp.Data;
-using System.Data;
 
 namespace WpfApp.View
 {
@@ -55,17 +54,14 @@ namespace WpfApp.View
                 return null;
         }
 
-        private void Refresh() {
-            lvEmployees.ItemsSource = DataBase.Current.Employees;
-        }
-
         private void NewEmployee()
         {
             Employee emp = ShowEditor(null);
             if (emp != null)
             {
                 DataBase.Current.Add(emp);
-                Refresh();
+                lvEmployees.Items.Refresh();
+                DataBase.Current.Write();
             }
         }
 
@@ -75,8 +71,8 @@ namespace WpfApp.View
                 return;
             if (ShowEditor(emp) != null)
             {
-                DataBase.Current.Update(emp);
-                Refresh();
+                lvEmployees.Items.Refresh();
+                DataBase.Current.Write();
             }
         }
 
@@ -91,7 +87,8 @@ namespace WpfApp.View
                 try
                 {
                     DataBase.Current.Remove(emp);
-                    Refresh();
+                    lvEmployees.Items.Refresh();
+                    DataBase.Current.Write();
                 }
                 catch (Exception ex)
                 {
@@ -102,7 +99,7 @@ namespace WpfApp.View
 
         private void lvEmployees_Loaded(object sender, RoutedEventArgs e)
         {
-            Refresh();
+            lvEmployees.ItemsSource = DataBase.Current.Employees;
         }
 
         private void lvEmployees_MouseDoubleClick(object sender, MouseButtonEventArgs e)

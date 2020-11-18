@@ -11,7 +11,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfApp.Data;
-using System.Data;
 
 namespace WpfApp.View
 {
@@ -49,17 +48,14 @@ namespace WpfApp.View
                 return null;
         }
 
-        private void Refresh() {
-            lvDepartments.ItemsSource = DataBase.Current.Departments;
-        }
-
         private void NewDepartment()
         {
             Department dept = ShowEditor(null);
             if (dept != null)
             {
                 DataBase.Current.Add(dept);
-                Refresh();
+                lvDepartments.Items.Refresh();
+                DataBase.Current.Write();
             }
         }
 
@@ -69,8 +65,8 @@ namespace WpfApp.View
                 return;
             if (ShowEditor(department) != null)
             {
-                DataBase.Current.Update(department);
-                Refresh();
+                lvDepartments.Items.Refresh();
+                DataBase.Current.Write();
             }
         }
 
@@ -85,7 +81,8 @@ namespace WpfApp.View
                 try
                 {
                     DataBase.Current.Remove(department);
-                    Refresh();
+                    lvDepartments.Items.Refresh();
+                    DataBase.Current.Write();
                 }
                 catch (Exception ex)
                 {
@@ -93,11 +90,6 @@ namespace WpfApp.View
                 }
             }
 
-        }
-
-        private void lvDepartments_Loaded(object sender, RoutedEventArgs e)
-        {
-            Refresh();
         }
 
         private void cmAdd_Click(object sender, RoutedEventArgs e)

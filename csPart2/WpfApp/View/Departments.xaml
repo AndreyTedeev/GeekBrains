@@ -6,16 +6,11 @@
              xmlns:local="clr-namespace:WpfApp.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.Resources>
-        <CollectionViewSource Source="{Binding Source={x:Static Application.Current}, Path=Departments}" x:Key="Departments"/>
-    </UserControl.Resources>
     <DockPanel LastChildFill="True">
         <TextBlock DockPanel.Dock="Top" Padding="10,10,10,10">
             Use ContextMenu (Right Click) or DoubleClick to edit, INSERT to add, DELETE to remove records
         </TextBlock>
-        <ListView x:Name="lvDepartments" 
-                  ItemsSource="{Binding Source={StaticResource Departments}}"
-                  MouseDoubleClick="lvDepartments_MouseDoubleClick" KeyDown="lvDepartments_KeyDown">
+        <ListView ItemsSource="{Binding}" x:Name="lvDepartments" Loaded="lvDepartments_Loaded" MouseDoubleClick="lvDepartments_MouseDoubleClick" KeyDown="lvDepartments_KeyDown">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="ID" Width="auto" DisplayMemberBinding="{Binding Id}">

@@ -1,37 +1,15 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace WpfApp.Data
 {
-    public class Department : INotifyPropertyChanged
+    public class Department
     {
-        int _id = -1;
-        string _name = "New Department";
-        public event PropertyChangedEventHandler PropertyChanged;
 
-        public int Id
-        {
-            get => _id;
-            set
-            {
-                _id = value;
-                OnPropertyChanged();
-            }
-        }
+        public int Id { get; set; }
 
-        public string Name
-        {
-            get => _name;
-            set
-            {
-                _name = value;
-                OnPropertyChanged();
-            }
-        }
+        public string Name { get; set; }
 
-        protected void OnPropertyChanged([CallerMemberName] string name = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
     }
 }

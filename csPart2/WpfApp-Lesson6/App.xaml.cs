@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Collections.ObjectModel;
 using WpfApp.Data;
 
 namespace WpfApp
@@ -16,14 +17,18 @@ namespace WpfApp
     {
         protected override void OnExit(ExitEventArgs e)
         {
-            DataBase.Current.Close();
+            DataBase.Current.Write();
             base.OnExit(e);
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            DataBase.Current.Open();
+            DataBase.Current.Read();
             base.OnStartup(e);
         }
+
+        public ObservableCollection<Department> Departments { get => DataBase.Current.Departments;  }
+
+        public ObservableCollection<Employee> Employees { get => DataBase.Current.Employees; }
     }
 }
