@@ -103,11 +103,12 @@ namespace WpfApp.Data
 
         public void Open()
         {
-            _connection ??= new SqlConnection(@"
-                Data Source=(LocalDB)\MSSQLLocalDB;
-                AttachDbFilename=C:\Users\andre\source\repos\AndreyTedeev\GeekBrains\csPart2\WpfApp\WpfAppSQL.mdf;
-                Integrated Security=True;
-                Connect Timeout=30");
+            SqlConnectionStringBuilder b = new SqlConnectionStringBuilder();
+            b.DataSource = "(LocalDB)\\MSSQLLocalDB";
+            b.AttachDBFilename = System.AppDomain.CurrentDomain.BaseDirectory + "WpfAppSQL.mdf";
+            b.IntegratedSecurity = true;
+            b.ConnectTimeout = 30;
+            _connection ??= new SqlConnection(b.ConnectionString);
             _connection.Open();
             CreateDepartmentDataTable();
             CreateEmployeeDataTable();
