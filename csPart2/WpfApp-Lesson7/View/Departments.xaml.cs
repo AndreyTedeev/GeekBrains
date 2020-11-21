@@ -1,9 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
-using WcfService;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using WpfApp.Data;
+using System.Data;
 
 namespace WpfApp.View
 {
@@ -41,45 +49,48 @@ namespace WpfApp.View
                 return null;
         }
 
-        private async void Refresh()
-        {
-            lvDepartments.ItemsSource = await (App.Current as WpfApp.App).Database.DepartmentsAsync();
+        private void Refresh() {
+            lvDepartments.ItemsSource = DataBase.Current.Departments;
         }
 
-        private async void NewDepartment()
+        private void NewDepartment()
         {
             Department dept = ShowEditor(null);
             if (dept != null)
             {
-                await (App.Current as WpfApp.App).Database.AddDepartmentAsync(dept);
+                DataBase.Current.Add(dept);
                 Refresh();
             }
         }
 
-        private async void EditDepartment(Department dept)
+        private void EditDepartment(Department department)
         {
-            if (dept == null)
+            if (department == null)
                 return;
-            if (ShowEditor(dept) != null)
+            if (ShowEditor(department) != null)
             {
-                await (App.Current as WpfApp.App).Database.UpdateDepartmentAsync(dept);
+                DataBase.Current.Update(department);
                 Refresh();
             }
         }
 
-        private async void RemoveDepartment(Department dept)
+        private void RemoveDepartment(Department department)
         {
-            if (dept == null)
+            if (department == null)
                 return;
             MessageBoxResult result =
                 MessageBox.Show("Are you sure?", "Remove Department", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
             {
-                var status = await (App.Current as WpfApp.App).Database.RemoveDepartmentAsync(dept.Id);
-                if (!status)
-                    MessageBox.Show($"Some Employee record(s) use department {dept.Id}.\n" +
-                            "Fix those Employee records first.");
-                Refresh();
+                try
+                {
+                    DataBase.Current.Remove(department);
+                    Refresh();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
 
         }

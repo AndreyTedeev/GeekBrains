@@ -1,9 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
-using WcfService;
+using System.Linq;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using WpfApp.Data;
+using System.Data;
 
 namespace WpfApp.View
 {
@@ -46,32 +55,32 @@ namespace WpfApp.View
                 return null;
         }
 
-        private async void Refresh() {
-            lvEmployees.ItemsSource = await (App.Current as WpfApp.App).Database.EmployeesAsync();
+        private void Refresh() {
+            lvEmployees.ItemsSource = DataBase.Current.Employees;
         }
 
-        private async void NewEmployee()
+        private void NewEmployee()
         {
             Employee emp = ShowEditor(null);
             if (emp != null)
             {
-                await (App.Current as WpfApp.App).Database.AddEmployeeAsync(emp);
+                DataBase.Current.Add(emp);
                 Refresh();
             }
         }
 
-        private async void EditEmployee(Employee emp)
+        private void EditEmployee(Employee emp)
         {
             if (emp == null)
                 return;
             if (ShowEditor(emp) != null)
             {
-                await (App.Current as WpfApp.App).Database.UpdateEmployeeAsync(emp);
+                DataBase.Current.Update(emp);
                 Refresh();
             }
         }
 
-        private async void RemoveEmployee(Employee emp)
+        private void RemoveEmployee(Employee emp)
         {
             if (emp == null)
                 return;
@@ -81,7 +90,7 @@ namespace WpfApp.View
             {
                 try
                 {
-                    await (App.Current as WpfApp.App).Database.RemoveEmployeeAsync(emp.Id);
+                    DataBase.Current.Remove(emp);
                     Refresh();
                 }
                 catch (Exception ex)
