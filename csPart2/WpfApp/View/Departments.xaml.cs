@@ -1,16 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using WpfApp.Data;
+using WcfService;
 
 namespace WpfApp.View
 {
@@ -48,53 +41,52 @@ namespace WpfApp.View
                 return null;
         }
 
-        private void NewDepartment()
+        private async void Refresh()
+        {
+            lvDepartments.ItemsSource = await (App.Current as WpfApp.App).Database.DepartmentsAsync();
+        }
+
+        private async void NewDepartment()
         {
             Department dept = ShowEditor(null);
             if (dept != null)
             {
-                DataBase.Current.Add(dept);
-                lvDepartments.Items.Refresh();
-                DataBase.Current.Write();
+                await (App.Current as WpfApp.App).Database.AddDepartmentAsync(dept);
+                Refresh();
             }
         }
 
-        private void EditDepartment(Department department)
+        private async void EditDepartment(Department dept)
         {
-            if (department == null)
+            if (dept == null)
                 return;
-            if (ShowEditor(department) != null)
+            if (ShowEditor(dept) != null)
             {
-                lvDepartments.Items.Refresh();
-                DataBase.Current.Write();
+                await (App.Current as WpfApp.App).Database.UpdateDepartmentAsync(dept);
+                Refresh();
             }
         }
 
-        private void RemoveDepartment(Department department)
+        private async void RemoveDepartment(Department dept)
         {
-            if (department == null)
+            if (dept == null)
                 return;
             MessageBoxResult result =
                 MessageBox.Show("Are you sure?", "Remove Department", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
             {
-                try
-                {
-                    DataBase.Current.Remove(department);
-                    lvDepartments.Items.Refresh();
-                    DataBase.Current.Write();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
+                var status = await (App.Current as WpfApp.App).Database.RemoveDepartmentAsync(dept.Id);
+                if (!status)
+                    MessageBox.Show($"Some Employee record(s) use department {dept.Id}.\n" +
+                            "Fix those Employee records first.");
+                Refresh();
             }
 
         }
 
         private void lvDepartments_Loaded(object sender, RoutedEventArgs e)
         {
-            lvDepartments.ItemsSource = DataBase.Current.Departments;
+            Refresh();
         }
 
         private void cmAdd_Click(object sender, RoutedEventArgs e)

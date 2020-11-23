@@ -1,17 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Linq;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using WpfApp.Data;
+using WcfService;
 
 namespace WpfApp.View
 {
@@ -54,29 +46,32 @@ namespace WpfApp.View
                 return null;
         }
 
-        private void NewEmployee()
+        private async void Refresh() {
+            lvEmployees.ItemsSource = await (App.Current as WpfApp.App).Database.EmployeesAsync();
+        }
+
+        private async void NewEmployee()
         {
             Employee emp = ShowEditor(null);
             if (emp != null)
             {
-                DataBase.Current.Add(emp);
-                lvEmployees.Items.Refresh();
-                DataBase.Current.Write();
+                await (App.Current as WpfApp.App).Database.AddEmployeeAsync(emp);
+                Refresh();
             }
         }
 
-        private void EditEmployee(Employee emp)
+        private async void EditEmployee(Employee emp)
         {
             if (emp == null)
                 return;
             if (ShowEditor(emp) != null)
             {
-                lvEmployees.Items.Refresh();
-                DataBase.Current.Write();
+                await (App.Current as WpfApp.App).Database.UpdateEmployeeAsync(emp);
+                Refresh();
             }
         }
 
-        private void RemoveEmployee(Employee emp)
+        private async void RemoveEmployee(Employee emp)
         {
             if (emp == null)
                 return;
@@ -86,9 +81,8 @@ namespace WpfApp.View
             {
                 try
                 {
-                    DataBase.Current.Remove(emp);
-                    lvEmployees.Items.Refresh();
-                    DataBase.Current.Write();
+                    await (App.Current as WpfApp.App).Database.RemoveEmployeeAsync(emp.Id);
+                    Refresh();
                 }
                 catch (Exception ex)
                 {
@@ -99,7 +93,7 @@ namespace WpfApp.View
 
         private void lvEmployees_Loaded(object sender, RoutedEventArgs e)
         {
-            lvEmployees.ItemsSource = DataBase.Current.Employees;
+            Refresh();
         }
 
         private void lvEmployees_MouseDoubleClick(object sender, MouseButtonEventArgs e)

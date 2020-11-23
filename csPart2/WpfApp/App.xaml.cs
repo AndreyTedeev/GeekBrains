@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
-using WpfApp.Data;
+using WcfService;
 
 namespace WpfApp
 {
@@ -14,16 +12,11 @@ namespace WpfApp
     /// </summary>
     public partial class App : Application
     {
-        protected override void OnExit(ExitEventArgs e)
-        {
-            DataBase.Current.Write();
-            base.OnExit(e);
-        }
 
-        protected override void OnStartup(StartupEventArgs e)
-        {
-            DataBase.Current.Read();
-            base.OnStartup(e);
+        IDatabaseService _service = new DatabaseServiceClient(); 
+
+        public IDatabaseService Database {
+            get => _service;
         }
     }
 }
