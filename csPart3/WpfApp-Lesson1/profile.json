@@ -1,0 +1,18 @@
+[
+  {
+    "Name": "Default Profile",
+    "SMTPHost": "smtp.yandex.ru",
+    "SMTPPort": 587,
+    "From": "somebody@yandex.ru",
+    "User": "somebody@yandex.ru",
+    "Password": ""
+  },
+  {
+    "Name": "TedAsh",
+    "SMTPHost": "smtp.yandex.ru",
+    "SMTPPort": 587,
+    "From": "tedash@yandex.ru",
+    "User": "tedash@yandex.ru",
+    "Password": ""
+  }
+]
