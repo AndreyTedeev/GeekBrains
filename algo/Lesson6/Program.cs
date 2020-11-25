@@ -24,24 +24,12 @@ namespace Lesson6
             // генерируем три файла
             List<Student> students;
             for (int i = 0; i < 3; i++)
-                Student.Write($"students{i + 1}.json", Student.GenerateStudents(30));
+                StudentFactory.Write($"students{i + 1}.json", StudentFactory.Generate(30));
 
             // делаем список файлов и печатаем меню
             string[] fileNames = Directory.GetFiles(".", "students*.json");
             Console.WriteLine("Выберите файл данных:");
-            int option;
-            do
-            {
-                option = 0;
-                foreach (string f in fileNames)
-                {
-                    option++;
-                    Console.WriteLine($"{option} : {f}");
-                }
-                Console.WriteLine();
-                Console.WriteLine("0 : Выход");
-            }
-            while (!int.TryParse(Console.ReadLine(), out option) && (option >= 0) && (option < fileNames.Length));
+            Menu(fileNames, out int option);
 
             // выход
             if (option == 0)
@@ -50,7 +38,7 @@ namespace Lesson6
             // читаем файл
             Console.Clear();
             Console.WriteLine($"Loading file {fileNames[option - 1]}");
-            students = Student.Read(fileNames[option - 1]);
+            students = StudentFactory.Read(fileNames[option - 1]);
 
             // будем в дереве искать какого нибудь студента по Age.
             // другие поля нас не интересуют потому, что 
@@ -72,23 +60,23 @@ namespace Lesson6
             else
             {
                 Console.WriteLine($"Success! {found}");
-                Console.WriteLine($"Finally... This Student HASH is {Hash(found.ToString())}");
+                Console.WriteLine($"Finally... This Student HASH is {found.Hash()}");
             }
         }
 
-        /// <summary>
-        /// Simple Hash implementation
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        private static long Hash(string input)
-        {
-            long result = 0;
-            for (int i = 0; i < input.Length - 1; i++)
+        static void Menu(string[] options, out int option) {
+            do
             {
-                result += input[i] * input[i + 1];
+                option = 0;
+                foreach (string f in options)
+                {
+                    option++;
+                    Console.WriteLine($"{option} : {f}");
+                }
+                Console.WriteLine();
+                Console.WriteLine("0 : Выход");
             }
-            return result;
+            while (!int.TryParse(Console.ReadLine(), out option) && (option >= 0) && (option < options.Length));
         }
 
     }
