@@ -28,7 +28,7 @@ namespace Lesson7
 
             string[] path2 = d.FindPath("X1", "X6");
             Console.WriteLine($"Path from X1 to X6 : {ToString(path2)}");
-
+            
             string[] result = (path1.Length < path2.Length) ? path1 : path2;
             Console.WriteLine($"The shortest route is : {ToString(result)}");
         }
