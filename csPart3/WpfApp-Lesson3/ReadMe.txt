@@ -3,6 +3,7 @@
 
 Все сервисы (IMailService, IStorage) сделал и вынес в библиотеку. 
 Все переделал полностью на MVVM. Сделал три UserControl. Один для Recipients и два Servers, Senders.
+Пока они биндятся к MainViewModel.
 Пока не выяснил как сделать один MVVM USerControl для Servers и Senders. 
 Все кнопки в них работают и пока показывают MessageBox с именем вызванного ICommand.
 Они одинаковые визуально, только данные разные.

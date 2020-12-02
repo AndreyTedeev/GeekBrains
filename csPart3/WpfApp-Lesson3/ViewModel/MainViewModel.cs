@@ -101,7 +101,7 @@ namespace WpfApp.ViewModel
                     _cmdAddSender = new LambdaCommand(
                         (p) => MessageBox.Show("AddSenderCommand")
                     );
-                return _cmdAddServer;
+                return _cmdAddSender;
             }
         }
 
