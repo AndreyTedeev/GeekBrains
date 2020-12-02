@@ -49,6 +49,93 @@ namespace WpfApp.ViewModel
             }
         }
 
+        private ICommand _cmdAddServer;
+        public ICommand AddServerCommand
+        {
+            get
+            {
+                if (_cmdAddServer == null)
+                    _cmdAddServer = new LambdaCommand(
+                        (p) => MessageBox.Show("AddServerCommand")
+                    );
+                return _cmdAddServer;
+            }
+        }
+
+        private ICommand _cmdEditServer;
+        public ICommand EditServerCommand
+        {
+            get
+            {
+                if (_cmdEditServer == null)
+                    _cmdEditServer = new LambdaCommand(
+                        (p) => MessageBox.Show("EditServerCommand")
+                        ,
+                        (p) => SelectedServer != null
+                    );
+                return _cmdEditServer;
+            }
+        }
+
+        private ICommand _cmdDeleteServer;
+        public ICommand DeleteServerCommand
+        {
+            get
+            {
+                if (_cmdDeleteServer == null)
+                    _cmdDeleteServer = new LambdaCommand(
+                        (p) => MessageBox.Show("DeleteServerCommand")
+                        ,
+                        (p) => SelectedServer != null
+                    );
+                return _cmdDeleteServer;
+            }
+        }
+
+        private ICommand _cmdAddSender;
+        public ICommand AddSenderCommand
+        {
+            get
+            {
+                if (_cmdAddSender == null)
+                    _cmdAddSender = new LambdaCommand(
+                        (p) => MessageBox.Show("AddSenderCommand")
+                    );
+                return _cmdAddServer;
+            }
+        }
+
+        private ICommand _cmdEditSender;
+        public ICommand EditSenderCommand
+        {
+            get
+            {
+                if (_cmdEditSender == null)
+                    _cmdEditSender = new LambdaCommand(
+                        (p) => MessageBox.Show("EditSenderCommand")
+                        ,
+                        (p) => SelectedSender != null
+                    );
+                return _cmdEditSender;
+            }
+        }
+
+        private ICommand _cmdDeleteSender;
+        public ICommand DeleteSenderCommand
+        {
+            get
+            {
+                if (_cmdDeleteSender == null)
+                    _cmdDeleteSender = new LambdaCommand(
+                        (p) => MessageBox.Show("DeleteSenderCommand")
+                        ,
+                        (p) => SelectedServer != null
+                    );
+                return _cmdDeleteSender;
+            }
+        }
+
+
         private void OnSaveDataCommandExecuted(object p)
         {
             _serverStorage.SaveChanges();
@@ -109,11 +196,15 @@ namespace WpfApp.ViewModel
         public int SelectedTab { get => _selectedTab; set => Set(ref _selectedTab, value); }
         #endregion
 
+        #region Members
+
         private readonly IMailService _mailService;
         private readonly IServerStorage _serverStorage;
         private readonly ISenderStorage _senderStorage;
         private readonly IRecipientStorage _recipientStorage;
         private readonly IEmailStorage _emailStorage;
+
+        #endregion
 
         public MainViewModel(IMailService mailService, IServerStorage serverStorage,
             ISenderStorage senderStorage, IRecipientStorage recipientStorage, IEmailStorage emailStorage)
