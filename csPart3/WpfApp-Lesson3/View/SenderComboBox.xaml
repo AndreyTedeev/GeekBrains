@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="WpfApp.View.SenderComboBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:fa5="http://schemas.fontawesome.com/icons/"
+             xmlns:local="clr-namespace:WpfApp.View"
+             mc:Ignorable="d"
+             DataContext="{Binding MainViewModel, Source={StaticResource Locator}}">
+    <StackPanel Orientation="Horizontal" Margin="4">
+        <ComboBox SelectedIndex="0" ItemsSource="{Binding Senders}" 
+                  SelectedItem="{Binding SelectedSender}" DisplayMemberPath="Name"/>
+        <Button>
+            <fa5:SvgAwesome Icon="Solid_Plus" Foreground="Green" Width="15" Height="15"/>
+        </Button>
+        <Button>
+            <fa5:SvgAwesome Icon="Solid_Edit" Foreground="Gray" Width="15" Height="15"/>
+        </Button>
+        <Button>
+            <fa5:SvgAwesome Icon="Solid_Trash" Foreground="Red" Width="15" Height="15"/>
+        </Button>
+    </StackPanel>
+</UserControl>
