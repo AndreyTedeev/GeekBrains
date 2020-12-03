@@ -5,6 +5,7 @@
     <TargetFramework>net48</TargetFramework>
     <RootNamespace>WpfApp</RootNamespace>
     <UseWPF>true</UseWPF>
+    <StartupObject>WpfApp.App</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
