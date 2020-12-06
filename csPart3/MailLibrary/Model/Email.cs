@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MailLibrary.Model.Base;
 
 namespace MailLibrary.Model
 {
-    public class Email
+    public class Email: Entity
     {
 
         public string Subject { get; set; }

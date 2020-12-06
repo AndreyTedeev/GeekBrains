@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailLibraryTest", "MailLibraryTest.csproj", "{49BE6E90-9F2D-44DA-B546-8CFD4A2D4227}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MailLibrary", "..\..\MailLibrary\MailLibrary.csproj", "{C4BB094D-72E3-44FC-9275-63A64D7363FC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{49BE6E90-9F2D-44DA-B546-8CFD4A2D4227}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49BE6E90-9F2D-44DA-B546-8CFD4A2D4227}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49BE6E90-9F2D-44DA-B546-8CFD4A2D4227}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49BE6E90-9F2D-44DA-B546-8CFD4A2D4227}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4BB094D-72E3-44FC-9275-63A64D7363FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4BB094D-72E3-44FC-9275-63A64D7363FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4BB094D-72E3-44FC-9275-63A64D7363FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4BB094D-72E3-44FC-9275-63A64D7363FC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4C7CFAEB-0F6B-419D-A4A4-4FC1261F6C9E}
+	EndGlobalSection
+EndGlobal

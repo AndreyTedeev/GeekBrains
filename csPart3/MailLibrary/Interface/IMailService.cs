@@ -1,12 +1,14 @@
-﻿namespace MailLibrary.Interface
+﻿using MailLibrary.Model;
+
+namespace MailLibrary.Interface
 {
     public interface IMailService
     {
-        IMailSender GetSender(string host, int port, string user, string password);
+        IMailSender GetSender(Server server );
     }
 
     public interface IMailSender
     {
-        void Send(string from, string to, string subject, string body);
+        void Send(Sender from, Recipient to, Email email);
     }
 }

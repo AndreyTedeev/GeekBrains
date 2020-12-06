@@ -1,36 +1,30 @@
-﻿using MailLibrary.Interface;
+﻿ using MailLibrary.Interface;
+using MailLibrary.Model;
 using System.Diagnostics;
 
 namespace MailLibrary
 {
     public class DebugMailService : IMailService
     {
-        public IMailSender GetSender(string host, int port, string user, string password)
+        public IMailSender GetSender(Server server)
         {
-            return new DebugMailSender(host, port, user, password);
+            return new DebugMailSender(server);
         }
     }
 
     public class DebugMailSender : IMailSender
     {
-        public string Host { get; set; }
-        public int Port { get; set; }
-        public string User { get; set; }
-        public string Password { get; set; }
 
-        public DebugMailSender(string host, int port, string user, string password)
+        public DebugMailSender(Server server)
         {
-            Host = host;
-            Port = port;
-            User = user;
-            Password = password;
+            
         }
 
-        public void Send(string from, string to, string subject, string body)
+        public void Send(Sender from, Recipient to, Email email)
         {
-            Debug.WriteLine($"Send from={from} to={to}");
-            Debug.WriteLine($"Subject={subject}");
-            Debug.WriteLine($"Body={body}");
+            Debug.WriteLine($"Send from={from.Address} to={to.Address}");
+            Debug.WriteLine($"Subject={email.Subject}");
+            Debug.WriteLine($"Body={email.Message}");
         }
     }
 }
