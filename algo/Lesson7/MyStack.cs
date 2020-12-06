@@ -4,13 +4,12 @@ using System.Text;
 
 namespace Lesson5
 {
-    class MyQueue<T>
+    public class MyStack<T>
     {
-        private static int SIZE = 4; 
+        private static int SIZE = 4;
 
         private T[] _data = new T[SIZE];
         private int _head = -1;
-        private int _tail = -1;
 
         private void Grow()
         {
@@ -19,12 +18,12 @@ namespace Lesson5
 
         public int Count
         {
-            get => _head - _tail;
+            get => _head + 1;
         }
 
-        public void Enqueue(T t)
+        public void Push(T t)
         {
-            if (_head == _data.Length - 1)
+            if (Count == _data.Length)
                 Grow();
             _data[++_head] = t;
             // eq
@@ -32,17 +31,26 @@ namespace Lesson5
             //_data[_head] = t;
         }
 
-        public T Dequeue()
+        public T Peek()
         {
             if (Count > 0)
-                return _data[++_tail];
+                return _data[_head];
+            else
+                throw new Exception("Stack is Empty");
+        }
+
+        public T Pop()
+        {
+            if (Count > 0)
+                return _data[_head--];
             //{ eq
-            //    _tail++;
-            //    T t = _data[_tail];
+            //    T t = _data[_head];
+            //    _head--;
             //    return t;
             //}
             else
-                throw new Exception("Queue is Empty");
+                throw new Exception("Stack is Empty");
         }
+
     }
 }
