@@ -1,4 +1,5 @@
 ﻿using MailLibrary.Interface;
+using MailLibrary.Model;
 using System.Net;
 using System.Net.Mail;
 
@@ -6,40 +7,34 @@ namespace MailLibrary
 {
     public class MailService : IMailService
     {
-        public IMailSender GetSender(string host, int port, string user, string password)
+        public IMailSender GetSender(Server server)
         {
-            return new DebugMailSender(host, port, user, password);
+            return new MailSender(server);
         }
     }
 
     public class MailSender : IMailSender
     {
-        public string Host { get; set; }
-        public int Port { get; set; }
-        public string User { get; set; }
-        public string Password { get; set; }
+        private Server _server;
 
-        public MailSender(string host, int port, string user, string password)
+        public MailSender(Server server)
         {
-            Host = host;
-            Port = port;
-            User = user;
-            Password = password;
+            _server = server;
         }
 
-        public void Send(string from, string to, string subject, string body)
+        public void Send(Sender from, Recipient to, Email email)
         {
-            MailAddress To = new MailAddress(to);
-            MailAddress From = new MailAddress(from);
-            MailMessage message = new MailMessage(from, to);
+            MailAddress To = new MailAddress(to.Address);
+            MailAddress From = new MailAddress(from.Address);
+            MailMessage message = new MailMessage(From, To);
             
-            message.Subject = subject;
-            message.Body = body;
+            message.Subject = email.Subject;
+            message.Body = email.Message;
             SmtpClient smtp = new SmtpClient
             {
-                Host = Host,
-                Port = this.Port,
-                Credentials = new NetworkCredential(User, Password),
+                Host = _server.Host,
+                Port = _server.Port,
+                Credentials = new NetworkCredential(_server.User, Crypto.Decode(_server.Password)),
                 Timeout = 2000,
                 EnableSsl = true
             };
