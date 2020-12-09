@@ -106,7 +106,7 @@ namespace Lesson5
                     {
                         foreach (Rec rec in _data)
                         {
-                            writer.WriteLine(_data[0].ToString());
+                            writer.WriteLine(rec.ToString());
                             count++;
                             Console.SetCursorPosition(0, 7);
                             Console.Write($"Writing record to '{fname.ToString()}' : {count}");
