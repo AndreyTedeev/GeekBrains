@@ -27,7 +27,7 @@ namespace Lesson6
 
             public override string ToString() => $"{Operation} {Value1:###0.00} {Value2:###0.00}";
 
-            public static Rec FromString(string s)
+            public static Rec Parse(string s)
             {
                 string[] fields = s.Split(' ');
                 if (fields.Length != 3)
@@ -77,7 +77,7 @@ namespace Lesson6
                 {
                     while (!reader.EndOfStream)
                     {
-                        result += Rec.FromString(await reader.ReadLineAsync()).ProcessOperation();
+                        result += Rec.Parse(await reader.ReadLineAsync()).ProcessOperation();
                     }
                 }
             }
