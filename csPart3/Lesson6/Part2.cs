@@ -73,12 +73,10 @@ namespace Lesson6
 
             foreach (string fileName in Directory.GetFiles(DIR_NAME, "f*.txt"))
             {
-                using (StreamReader reader = File.OpenText(fileName))
+                using StreamReader reader = File.OpenText(fileName);
+                while (!reader.EndOfStream)
                 {
-                    while (!reader.EndOfStream)
-                    {
-                        result += Rec.Parse(await reader.ReadLineAsync()).ProcessOperation();
-                    }
+                    result += Rec.Parse(await reader.ReadLineAsync()).ProcessOperation();
                 }
             }
             return result;
@@ -96,18 +94,16 @@ namespace Lesson6
 
             for (int i = 0; i < numFiles; i++)
             {
-                using (FileStream stream = File.Create($"{DIR_NAME}\\f{i:00}.txt"))
+                using FileStream stream = File.Create($"{DIR_NAME}\\f{i:00}.txt");
+                for (int j = 0; j < numOps; j++)
                 {
-                    for (int j = 0; j < numOps; j++)
+                    rec = new Rec
                     {
-                        rec = new Rec
-                        {
-                            Operation = (random.Next(1, 100) % 2 == 0) ? 1 : 2,
-                            Value1 = random.Next(100, 10000) / 100.00,
-                            Value2 = random.Next(100, 10000) / 100.00
-                        };
-                        await stream.WriteAsync(Encoding.ASCII.GetBytes(rec.ToString() + '\n'));
-                    }
+                        Operation = (random.Next(1, 100) % 2 == 0) ? 1 : 2,
+                        Value1 = random.Next(100, 10000) / 100.00,
+                        Value2 = random.Next(100, 10000) / 100.00
+                    };
+                    await stream.WriteAsync(Encoding.ASCII.GetBytes(rec.ToString() + '\n'));
                 }
             }
         }
