@@ -89,7 +89,7 @@ namespace Lesson5
             lock (_Finished)
             {
                 _Finished = (int)_Finished + 1;
-                Console.SetCursorPosition(0, 12);
+                Console.SetCursorPosition(0,12);
             }
         }
 

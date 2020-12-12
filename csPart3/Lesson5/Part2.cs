@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -16,16 +14,16 @@ namespace Lesson5
     public class Part2
     {
 
-        struct Rec
+        private struct Rec
         {
             public int Code;
             public double Price;
             public override string ToString() => $"{Code};{Price}";
         }
 
-        static int TOTAL_THREADS = 2;
-        static List<Rec> _data = new List<Rec>(); // locker with data
-        static int _Finished = 0;
+        private const int TOTAL_THREADS = 2;
+        private static readonly List<Rec> _data = new List<Rec>(); // locker with data
+        private static int _finished = 0;
 
         public static void Run()
         {
@@ -40,7 +38,7 @@ namespace Lesson5
             {
                 lock (_data)
                 {
-                    if (_Finished == TOTAL_THREADS)
+                    if (_finished == TOTAL_THREADS)
                         break;
                     Console.SetCursorPosition(0, 10);
                     Console.Write($"Подождите... {c[cpos++]}");
@@ -79,20 +77,20 @@ namespace Lesson5
                         if (price > 5000)
                             _data.Add(new Rec { Code = code, Price = price });
                         Console.SetCursorPosition(0, 5);
-                        Console.Write($"Reading record from '{fname.ToString()}' : {count}");
+                        Console.Write($"Reading record from '{fname}' : {count}");
                     }
                     //Thread.Sleep(1);
                 }
             }
             lock (_data)
             {
-                _Finished = 1;
+                _finished = 1;
             }
         }
 
         /// <summary>
         /// Monitors _data and if it has records, writes it to the file then removes records.
-        /// Exits when _Finished is set to 1, indicating reading process is finished;
+        /// Exits when _finished is set to 1, indicating reading process is finished;
         /// </summary>
         /// <param name="fname"></param>
         static void WriteTask(object fname)
@@ -109,13 +107,13 @@ namespace Lesson5
                             writer.WriteLine(rec.ToString());
                             count++;
                             Console.SetCursorPosition(0, 7);
-                            Console.Write($"Writing record to '{fname.ToString()}' : {count}");
+                            Console.Write($"Writing record to '{fname}' : {count}");
                         }
                         _data.Clear();
                         lock (_data)
                         {
-                            if (_Finished == 1) {
-                                _Finished = 2;
+                            if (_finished == 1) {
+                                _finished = 2;
                                 break;
                             }
                         }
