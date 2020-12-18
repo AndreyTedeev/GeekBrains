@@ -1,6 +1,9 @@
 using MailLibrary;
+using MailLibrary.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Diagnostics;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using System.Threading.Tasks;
 
 namespace MailLibraryTest
 {
@@ -8,37 +11,37 @@ namespace MailLibraryTest
     public class MailLibraryTest
     {
 
-        private string INPUT_STRING;
+        private MailDb _db;
+
+        public static IConfiguration Configuration { get; set; }
 
         [TestInitialize]
-        public void Init() {
-#if DEBUG
-            Debug.WriteLine("Init");
-#endif
-            INPUT_STRING = "Test Input";
+        public async Task InitAsync() {
+            Configuration = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .AddEnvironmentVariables()
+                .Build();
+            var options = new DbContextOptionsBuilder<MailDb>()
+                .UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+                .Options;
+            _db = new MailDb(options);
+            await _db.Database.MigrateAsync();
         }
 
         [TestCleanup]
         public void CleanUp() 
         {
-#if DEBUG
-            Debug.WriteLine("Clenup");
-#endif
+            _db?.Dispose();
         }
 
         [TestMethod]
-        public void CryptoTest()
-        {
-#if DEBUG
-            Debug.WriteLine("CryptoTest");
-#endif
-            Assert.AreEqual(
-                INPUT_STRING, 
-                Crypto.Decode( Crypto.Encode(INPUT_STRING) ),
-                "Crypto is failed.");
-            StringAssert.Equals(
-                INPUT_STRING,
-                Crypto.Decode(Crypto.Encode(INPUT_STRING)));
+        public async Task TestInitalData() {
+            Assert.IsTrue(await _db.Servers.CountAsync() >= 3);
+            Assert.IsTrue(await _db.Senders.CountAsync() >= 3);
+            Assert.IsTrue(await _db.Recipients.CountAsync() >= 3);
+            Assert.IsTrue(await _db.Emails.CountAsync() >= 3);
+            Assert.IsTrue(await _db.Schedules.CountAsync() >= 3);
         }
+
     }
 }

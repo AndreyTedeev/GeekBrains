@@ -20,13 +20,14 @@ namespace Lesson6
     /// </summary>
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             Console.WriteLine(" --- Part1 --- ");
             Part1.Run();
 
             Console.WriteLine(" --- Part2 --- ");
             Task.Run(() => Part2.Run());
+
             Console.ReadLine();
         }
     }

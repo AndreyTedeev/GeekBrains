@@ -2,6 +2,7 @@
 using MailLibrary.Model;
 using System.Net;
 using System.Net.Mail;
+using System.Threading.Tasks;
 
 namespace MailLibrary
 {
@@ -39,6 +40,10 @@ namespace MailLibrary
                 EnableSsl = true
             };
             smtp.Send(message);
+        }
+
+        public async Task SendAsync(Sender from, Recipient to, Email email) {
+            await Task.Run(() => Send(from, to, email));
         }
     }
 }
