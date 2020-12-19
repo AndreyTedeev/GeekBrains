@@ -37,7 +37,7 @@ namespace report
             reportDataSource.Name = "RecipientsDataSet";
             reportDataSource.Value = dataset.Recipients;
             ReportViewer.LocalReport.DataSources.Add(reportDataSource);
-            ReportViewer.LocalReport.ReportPath = "../../Report1.rdlc";
+            ReportViewer.LocalReport.ReportPath = "../../../Report1.rdlc";
             dataset.EndInit();
             RecipientsTableAdapter recipientsTableAdapter = new RecipientsTableAdapter { ClearBeforeFill = true };
             recipientsTableAdapter.Fill(dataset.Recipients);

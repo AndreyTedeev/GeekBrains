@@ -338,8 +338,6 @@ namespace WpfApp.ViewModel {
 
         #endregion
 
-
-
         public MainViewModel(IMailService mailService, MailDb mailDb) {
             _mailService = mailService;
             _mailDb = mailDb;
