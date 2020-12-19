@@ -40,6 +40,7 @@ namespace WpfApp.ViewModel {
                 _mailDb.Servers.Add(server);
                 await _mailDb.SaveChangesAsync();
                 await LoadServersAsync();
+                SelectedServer = server;
             }
             catch (Exception ex) {
                 MessageBox.Show(ex.Message);
@@ -58,7 +59,7 @@ namespace WpfApp.ViewModel {
                 _mailDb.Servers.Update(server);
                 await _mailDb.SaveChangesAsync();
                 await LoadServersAsync();
-                //SelectedServer = (from x in Servers where x.Id == server.Id select x).Single();
+                SelectedServer.OnPropertyChanged(nameof(Server.FullName));
             }
             catch (Exception ex) {
                 MessageBox.Show(ex.Message);
@@ -71,7 +72,15 @@ namespace WpfApp.ViewModel {
                 (p) => SelectedServer != null);
 
         private async Task DeleteServerAsync() {
-            MessageBox.Show("DeleteServerCommand");
+            try {
+                _mailDb.Servers.Remove(SelectedServer);
+                await _mailDb.SaveChangesAsync();
+                SelectedServer = null;
+                await LoadServersAsync();
+            }
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private ICommand _cmdAddSender;
@@ -79,25 +88,56 @@ namespace WpfApp.ViewModel {
             _cmdAddSender ??= new AsyncCommand(AddSenderAsync);
 
         private async Task AddSenderAsync() {
-            MessageBox.Show("AddSenderCommand");
+            int i = new Random().Next(1, 10);
+            var sender = new Sender {
+                Name = $"sender{i}",
+                Address = $"sender{i}@mail.ru"
+            };
+            try {
+                _mailDb.Senders.Add(sender);
+                await _mailDb.SaveChangesAsync();
+                await LoadSendersAsync();
+                SelectedSender= sender;
+            }
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private ICommand _cmdEditSender;
         public ICommand EditSenderCommand =>
-            _cmdEditSender ??= new AsyncCommand(EditServerAsync,
+            _cmdEditSender ??= new AsyncCommand(EditSenderAsync,
                 (p) => SelectedSender != null);
 
         private async Task EditSenderAsync() {
-            MessageBox.Show("EditSenderCommand");
+            var sender = SelectedSender;
+            sender.Name += "X";
+            try {
+                _mailDb.Senders.Update(sender);
+                await _mailDb.SaveChangesAsync();
+                await LoadSendersAsync();
+                //SelectedSender.OnPropertyChanged(nameof(Sender.Name));
+            }
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private ICommand _cmdDeleteSender;
         public ICommand DeleteSenderCommand =>
-            _cmdDeleteSender ??= new AsyncCommand(DeleteServerAsync,
-                (p) => SelectedServer != null);
+            _cmdDeleteSender ??= new AsyncCommand(DeleteSenderAsync,
+                (p) => SelectedSender != null);
 
         private async Task DeleteSenderAsync() {
-            MessageBox.Show("DeleteSenderCommand");
+            try {
+                _mailDb.Senders.Remove(SelectedSender);
+                await _mailDb.SaveChangesAsync();
+                SelectedSender = null;
+                await LoadSendersAsync();
+            }
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private ICommand _cmdSendEmail;
@@ -145,22 +185,55 @@ namespace WpfApp.ViewModel {
             }
         }
 
+        private ICommand _cmdLoadData;
+        public ICommand LoadDataCommand =>
+            _cmdLoadData ??= new AsyncCommand(LoadDataAsync);
+
+        private async Task LoadDataAsync() {
+            await LoadServersAsync();
+            await LoadSendersAsync();
+            await LoadRecipientsAsync();
+            await LoadEmailsAsync();
+            await LoadSchedulesAsync();
+        }
+
+        private async Task LoadServersAsync() {
+            Servers = new ObservableCollection<Server>(
+                    await (from x in _mailDb.Servers select x).ToListAsync());
+            if ((SelectedServer == null) && Servers.Count > 0) {
+                SelectedServer = Servers[0];
+            }
+        }
+
+        private async Task LoadSendersAsync() {
+            Senders = new ObservableCollection<Sender>(
+                await (from x in _mailDb.Senders select x).ToListAsync());
+            if ((SelectedSender == null) && Senders.Count > 0) {
+                SelectedSender = Senders[0];
+            }
+        }
+
+        private async Task LoadRecipientsAsync() {
+            Recipients = new ObservableCollection<Recipient>(
+               await (from x in _mailDb.Recipients select x).ToListAsync());
+        }
+
+        private async Task LoadEmailsAsync() {
+            Emails = new ObservableCollection<Email>(
+                await (from x in _mailDb.Emails select x).ToListAsync());
+        }
+
+        private async Task LoadSchedulesAsync() {
+            Schedules = new ObservableCollection<Schedule>(
+                await (from x in _mailDb.Schedules select x).ToListAsync());
+        }
+
         #endregion
 
         #region Properties
 
         private ObservableCollection<Server> _servers;
-        public ObservableCollection<Server> Servers {
-            get => _servers;
-            set {
-                Set(ref _servers, value);
-                if (SelectedServer != null) {
-                    int id = SelectedServer.Id;
-                    SelectedServer = null;
-                    Set(ref _selectedServer, (from x in _servers where x.Id == id select x).Single());
-                }
-            }
-        }
+        public ObservableCollection<Server> Servers { get => _servers; set => Set(ref _servers, value); }
 
         private ObservableCollection<Sender> _senders;
         public ObservableCollection<Sender> Senders { get => _senders; set => Set(ref _senders, value); }
@@ -197,43 +270,13 @@ namespace WpfApp.ViewModel {
 
         #endregion
 
-        private async Task LoadServersAsync() {
-            Servers = new ObservableCollection<Server>(
-                    await (from x in _mailDb.Servers select x).ToListAsync());
-        }
 
-        private async Task LoadSendersAsync() {
-            Senders = new ObservableCollection<Sender>(
-                await (from x in _mailDb.Senders select x).ToListAsync());
-        }
-
-        private async Task LoadRecipientsAsync() {
-            Recipients = new ObservableCollection<Recipient>(
-               await (from x in _mailDb.Recipients select x).ToListAsync());
-        }
-
-        private async Task LoadEmailsAsync() {
-            Emails = new ObservableCollection<Email>(
-                await (from x in _mailDb.Emails select x).ToListAsync());
-        }
-
-        private async Task LoadSchedulesAsync() {
-            Schedules = new ObservableCollection<Schedule>(
-                await (from x in _mailDb.Schedules select x).ToListAsync());
-        }
-
-        private async Task LoadDataAsync() {
-            await LoadServersAsync();
-            await LoadSendersAsync();
-            await LoadRecipientsAsync();
-            await LoadEmailsAsync();
-            await LoadSchedulesAsync();
-        }
 
         public MainViewModel(IMailService mailService, MailDb mailDb) {
             _mailService = mailService;
             _mailDb = mailDb;
-            Task.Run(() => LoadDataAsync());
+            // data will be loaded with Iteration Triggers in MainWindow
+            //Task.Run(() => LoadDataAsync());
         }
     }
 }

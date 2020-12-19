@@ -4,14 +4,16 @@ using MailLibrary.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MailLibrary.Migrations
 {
     [DbContext(typeof(MailDb))]
-    partial class MailDbModelSnapshot : ModelSnapshot
+    [Migration("20201219033925_Fix-Seeding-Schedule")]
+    partial class FixSeedingSchedule
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

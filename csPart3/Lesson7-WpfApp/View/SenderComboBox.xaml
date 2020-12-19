@@ -9,7 +9,7 @@
              mc:Ignorable="d"
              DataContext="{Binding MainViewModel, Source={StaticResource Locator}}">
     <StackPanel Orientation="Horizontal" Margin="4">
-        <ComboBox SelectedIndex="0" ItemsSource="{Binding Senders}" 
+        <ComboBox ItemsSource="{Binding Senders}" 
                   SelectedItem="{Binding SelectedSender}" DisplayMemberPath="Name"/>
         <Button Command="{Binding AddSenderCommand}">
             <fa5:SvgAwesome Icon="Solid_Plus" Foreground="Green" Width="15" Height="15"/>

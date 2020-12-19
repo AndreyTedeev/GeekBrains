@@ -8,7 +8,7 @@
              xmlns:cmd="clr-namespace:WpfApp.ViewModel.Commands"
              mc:Ignorable="d" DataContext="{Binding MainViewModel, Source={StaticResource Locator}}">
     <StackPanel Orientation="Horizontal" Margin="4">
-        <ComboBox SelectedIndex="0" ItemsSource="{Binding Servers}" 
+        <ComboBox ItemsSource="{Binding Servers}" 
                   SelectedItem="{Binding SelectedServer}" DisplayMemberPath="FullName"/>
         <Button Command="{Binding AddServerCommand}">
             <fa5:SvgAwesome Icon="Solid_Plus" Foreground="Green" Width="15" Height="15"/>

@@ -10,8 +10,9 @@ namespace MailLibrary.Model
         [Required, MaxLength(100)]
         public string Host { get; set; }
 
+        private int _port = default;
         [Required]
-        public int Port { get; set; }
+        public int Port { get => _port; set => Set(ref _port, value); }
 
         [Required, MaxLength(100)]
         public string User { get; set; }

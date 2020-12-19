@@ -52,13 +52,13 @@ namespace MailLibrary.Data {
             Schedule[] schedules = {
                 new Schedule {
                     Id=1, ServerId=1, SenderId=1, RecipientId=1,
-                    EmailId=1, DateTime = DateTime.Now },
+                    EmailId=1, DateTime = new DateTime(2021,12,12) },
                 new Schedule {
                     Id=2, ServerId=2, SenderId=2, RecipientId=2,
-                    EmailId=2, DateTime = DateTime.Now },
+                    EmailId=2, DateTime = new DateTime(2021,12,12) },
                 new Schedule {
                     Id=3, ServerId=3, SenderId=3, RecipientId=3,
-                    EmailId=3, DateTime = DateTime.Now },
+                    EmailId=3, DateTime = new DateTime(2021,12,12) },
             };
             modelBuilder.Entity<Schedule>().HasData(schedules);
         }
