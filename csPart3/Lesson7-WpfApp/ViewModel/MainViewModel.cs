@@ -24,6 +24,7 @@ namespace WpfApp.ViewModel {
             SelectedTab = int.Parse(p as string);
         }
 
+        #region Server Commands
         private ICommand _cmdAddServer;
         public ICommand AddServerCommand =>
             _cmdAddServer ??= new AsyncCommand(AddServerAsync);
@@ -82,7 +83,9 @@ namespace WpfApp.ViewModel {
                 MessageBox.Show(ex.Message);
             }
         }
+        #endregion
 
+        #region Sender Commands
         private ICommand _cmdAddSender;
         public ICommand AddSenderCommand =>
             _cmdAddSender ??= new AsyncCommand(AddSenderAsync);
@@ -139,7 +142,66 @@ namespace WpfApp.ViewModel {
                 MessageBox.Show(ex.Message);
             }
         }
+        #endregion
 
+        #region Recipient Commands
+        private ICommand _cmdAddRecipient;
+        public ICommand AddRecipientCommand =>
+            _cmdAddRecipient ??= new AsyncCommand(AddRecipientAsync);
+
+        private async Task AddRecipientAsync() {
+            int i = new Random().Next(1, 10);
+            var recipient = new Recipient {
+                Name = $"recipient{i}",
+                Address = $"recipient{i}@mail.ru"
+            };
+            try {
+                _mailDb.Recipients.Add(recipient);
+                await _mailDb.SaveChangesAsync();
+                await LoadRecipientsAsync();
+                SelectedRecipient = recipient;
+            }
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private ICommand _cmdEditRecipient;
+        public ICommand EditRecipientCommand =>
+            _cmdEditRecipient ??= new AsyncCommand(EditRecipientAsync,
+                (p) => SelectedRecipient != null);
+
+        private async Task EditRecipientAsync() {
+            try {
+                _mailDb.Recipients.Update(SelectedRecipient);
+                await _mailDb.SaveChangesAsync();
+                await LoadRecipientsAsync();
+            }
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private ICommand _cmdDeleteRecipient;
+        public ICommand DeleteRecipientCommand =>
+            _cmdDeleteRecipient ??= new AsyncCommand(DeleteRecipientAsync,
+                (p) => SelectedRecipient != null);
+
+        private async Task DeleteRecipientAsync() {
+            try {
+                _mailDb.Recipients.Remove(SelectedRecipient);
+                await _mailDb.SaveChangesAsync();
+                SelectedRecipient = null;
+                await LoadRecipientsAsync();
+            }
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        #endregion
+
+        #region Email and Schedule Commands
         private ICommand _cmdSendEmail;
         public ICommand SendEmailCommand =>
             _cmdSendEmail ??= new AsyncCommand(SendEmailAsync,
@@ -184,7 +246,9 @@ namespace WpfApp.ViewModel {
                 MessageBox.Show(ex.Message);
             }
         }
+        #endregion
 
+        #region LoadData Commands
         private ICommand _cmdLoadData;
         public ICommand LoadDataCommand =>
             _cmdLoadData ??= new AsyncCommand(LoadDataAsync);
@@ -216,6 +280,9 @@ namespace WpfApp.ViewModel {
         private async Task LoadRecipientsAsync() {
             Recipients = new ObservableCollection<Recipient>(
                await (from x in _mailDb.Recipients select x).ToListAsync());
+            if ((SelectedRecipient == null) && Recipients.Count > 0) {
+                SelectedRecipient = Recipients[0];
+            }
         }
 
         private async Task LoadEmailsAsync() {
@@ -227,7 +294,8 @@ namespace WpfApp.ViewModel {
             Schedules = new ObservableCollection<Schedule>(
                 await (from x in _mailDb.Schedules select x).ToListAsync());
         }
-
+        #endregion
+        
         #endregion
 
         #region Properties

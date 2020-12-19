@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MailLibraryTest", "..\Tests
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lesson7-WpfApp", "Lesson7-WpfApp.csproj", "{45C10690-7A56-4BE7-96EA-AA9585BADA66}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MailLibraryReport", "..\Reports\MailLibraryReport\MailLibraryReport.csproj", "{91109DF0-2DE7-4677-8418-33327A813466}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{45C10690-7A56-4BE7-96EA-AA9585BADA66}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45C10690-7A56-4BE7-96EA-AA9585BADA66}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45C10690-7A56-4BE7-96EA-AA9585BADA66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91109DF0-2DE7-4677-8418-33327A813466}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91109DF0-2DE7-4677-8418-33327A813466}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91109DF0-2DE7-4677-8418-33327A813466}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91109DF0-2DE7-4677-8418-33327A813466}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
