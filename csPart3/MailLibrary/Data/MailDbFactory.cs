@@ -2,8 +2,6 @@
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 
-
-
 namespace MailLibrary.Data {
 
     public class MailDbFactory : IDesignTimeDbContextFactory<MailDb> {
