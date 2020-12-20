@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace MailLibrary.Model.Base {
+
     public class Entity : INotifyPropertyChanged {
 
         [Key]

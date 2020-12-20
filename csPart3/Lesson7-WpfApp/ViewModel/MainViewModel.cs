@@ -60,7 +60,8 @@ namespace WpfApp.ViewModel {
                 _mailDb.Servers.Update(server);
                 await _mailDb.SaveChangesAsync();
                 await LoadServersAsync();
-                SelectedServer.OnPropertyChanged(nameof(Server.FullName));
+                //moved to the Server Port and Host
+                //SelectedServer.OnPropertyChanged(nameof(Server.FullName));
             }
             catch (Exception ex) {
                 MessageBox.Show(ex.Message);
