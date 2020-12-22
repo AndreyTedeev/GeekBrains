@@ -14,9 +14,9 @@ namespace Lesson2
             Console.ReadLine();
         }
 
-        static AbstractWorker[] InitData()
+        static AbstractWorker[] InitData(int size)
         {
-            AbstractWorker[] data = new AbstractWorker[10];
+            AbstractWorker[] data = new AbstractWorker[size];
             Random random = new Random();
             for (int i = 0; i < data.Length; i++)
             {
