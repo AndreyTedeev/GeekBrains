@@ -37,11 +37,11 @@ namespace AndreyTedeev.Asteroids
             }
         }
         static public Image _background = Image.FromFile("Resources\\back.jpg");
-        static Timer _timer = new Timer();
-        static int _starCount = 200;
-        static int _asteroidCount = 10;
+        static readonly Timer _timer = new Timer();
+        static readonly int _starCount = 200;
+        static readonly int _asteroidCount = 10;
         static List<BaseObject> _data;
-        static List<BaseObject> _finished = new List<BaseObject>();
+        static readonly List<BaseObject> _finished = new List<BaseObject>();
         static Ship _ship;
         static int _score = 0;
         static int _lives = 5;
@@ -138,7 +138,7 @@ namespace AndreyTedeev.Asteroids
             }
             _ship.Update();
             ShipCollision(_ship);
-            
+
             foreach (BaseObject obj in _finished)
             {
                 _data.Remove(obj);
@@ -148,7 +148,7 @@ namespace AndreyTedeev.Asteroids
                     _data.Add(new MedKit());
             }
             _finished.Clear();
-            
+
         }
 
         private static void GameOver()
@@ -156,7 +156,7 @@ namespace AndreyTedeev.Asteroids
             _timer.Stop();
             MessageBox.Show("GAME OVER");
             _form.Close();
-            
+
         }
 
         private static void BulletCollision(Bullet bullet)
@@ -175,7 +175,8 @@ namespace AndreyTedeev.Asteroids
             }
         }
 
-        private static void ShipCollision(Ship ship) {
+        private static void ShipCollision(Ship ship)
+        {
             foreach (BaseObject obj in _data)
             {
                 if (obj is Star)

@@ -6,7 +6,7 @@ namespace Lesson2
 {
     class MonthlyWorker : AbstractWorker
     {
-        double _salary;
+        readonly double _salary;
 
         public MonthlyWorker(string name, double salary) : base(name)
         {

@@ -5,7 +5,7 @@ namespace AndreyTedeev.Asteroids.Data
 {
     class Star : BaseObject
     {
-        private Color _color;
+        private readonly Color _color;
 
         public Star(Point pos, Point dir, Size size, Color color) : base(pos, dir, size)
         {

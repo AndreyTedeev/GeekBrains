@@ -9,7 +9,7 @@ namespace AndreyTedeev.Asteroids.Data
 {
     class Ship : ImageObject
     {
-        int _speed = 2;
+        readonly int _speed = 2;
 
         public Ship() : base()
         {
@@ -25,7 +25,8 @@ namespace AndreyTedeev.Asteroids.Data
         {
             _bounds.X += _dir.X;
             _bounds.Y += _dir.Y;
-            if (_bounds.X < 0) {
+            if (_bounds.X < 0)
+            {
                 _dir.X = 0;
                 _bounds.X = 0;
             }
@@ -34,7 +35,8 @@ namespace AndreyTedeev.Asteroids.Data
                 _dir.X = 0;
                 _bounds.X = Game.Width - _image.Size.Width;
             }
-            if (_bounds.Y < 0) {
+            if (_bounds.Y < 0)
+            {
                 _dir.Y = 0;
                 _bounds.Y = 0;
             }
@@ -45,7 +47,8 @@ namespace AndreyTedeev.Asteroids.Data
             }
         }
 
-        public void MoveUp() {
+        public void MoveUp()
+        {
             _dir.Y -= _speed;
         }
 
@@ -64,7 +67,8 @@ namespace AndreyTedeev.Asteroids.Data
             _dir.X += _speed;
         }
 
-        public Bullet Fire() {
+        public Bullet Fire()
+        {
             Point pos = new Point(_bounds.X + Image.Size.Width, _bounds.Y + Image.Size.Height / 2);
             return new Bullet(pos);
         }

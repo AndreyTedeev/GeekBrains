@@ -4,7 +4,7 @@ namespace Lesson2
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             Console.WriteLine("Lesson2 demo by Andrey Tedeev");
             Console.WriteLine();
@@ -14,7 +14,8 @@ namespace Lesson2
             Console.ReadLine();
         }
 
-        static AbstractWorker[] InitData(int size) {
+        static AbstractWorker[] InitData()
+        {
             AbstractWorker[] data = new AbstractWorker[10];
             Random random = new Random();
             for (int i = 0; i < data.Length; i++)
@@ -28,7 +29,7 @@ namespace Lesson2
             return data;
         }
 
-        static void Print(AbstractWorker[] data) 
+        static void Print(AbstractWorker[] data)
         {
             foreach (AbstractWorker worker in data)
                 worker.Print();

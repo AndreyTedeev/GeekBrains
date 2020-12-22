@@ -27,7 +27,7 @@ namespace AndreyTedeev.AsteroidsUWP
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        private Game _game;
+        private readonly Game _game;
 
         public MainPage()
         {
@@ -43,11 +43,6 @@ namespace AndreyTedeev.AsteroidsUWP
         private void MainPage_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             _game.SizeChanged(this.ActualSize);
-        }
-
-        private void GameCanvas_PointerPressed(object sender, PointerRoutedEventArgs e)
-        {
-
         }
     }
 
