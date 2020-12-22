@@ -14,7 +14,9 @@ using System;
 namespace WpfApp.ViewModel {
     public class MainViewModel : ViewModelBase {
 
-        #region Commands
+
+        /**/
+        #region Commands 
 
         private ICommand _cmdSelectTabIndex;
         public ICommand SelectTabIndexCommand =>
