@@ -1,6 +1,7 @@
 ﻿ using MailLibrary.Interface;
 using MailLibrary.Model;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace MailLibrary
 {
@@ -25,6 +26,10 @@ namespace MailLibrary
             Debug.WriteLine($"Send from={from.Address} to={to.Address}");
             Debug.WriteLine($"Subject={email.Subject}");
             Debug.WriteLine($"Body={email.Message}");
+        }
+
+        public async Task SendAsync(Sender from, Recipient to, Email email) {
+            await Task.Run(() => Send(from, to, email));
         }
     }
 }

@@ -1,14 +1,20 @@
 ﻿using MailLibrary.Model.Base;
 using System;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MailLibrary.Model
 {
+    [Table("Recipients", Schema = "dbo")]
     public class Recipient : PersonEntity, IDataErrorInfo
     {
+        [NotMapped]
         private string _error = "";
+
+        [NotMapped]
         public string Error => _error;
 
+        [NotMapped]
         public string this[string columnName] {
             get {
                 _error = "";

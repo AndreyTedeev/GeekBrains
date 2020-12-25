@@ -4,11 +4,13 @@ namespace AndreyTedeev.Asteroids
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            Form form = new Form();
-            form.Width = 800;
-            form.Height = 600;
+            Form form = new Form
+            {
+                Width = 800,
+                Height = 600
+            };
             Game.Init(form);
             form.Show();
             Game.Draw();

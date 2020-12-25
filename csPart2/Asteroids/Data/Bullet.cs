@@ -5,7 +5,7 @@ namespace AndreyTedeev.Asteroids.Data
 {
     class Bullet : BaseObject
     {
-        private Color _color;
+        private readonly Color _color;
 
         public Bullet(Point pos, Point dir, Size size, Color color) : base(pos, dir, size)
         {

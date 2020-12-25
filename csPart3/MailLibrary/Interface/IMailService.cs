@@ -1,4 +1,5 @@
 ﻿using MailLibrary.Model;
+using System.Threading.Tasks;
 
 namespace MailLibrary.Interface
 {
@@ -10,5 +11,6 @@ namespace MailLibrary.Interface
     public interface IMailSender
     {
         void Send(Sender from, Recipient to, Email email);
+        Task SendAsync(Sender from, Recipient to, Email email);
     }
 }

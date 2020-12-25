@@ -18,10 +18,10 @@ namespace AndreyTedeev.AsteroidsUWP
 
         public Game()
         {
-            Timer _timer = new Timer(_TimerCallback, new object(), 100, 100);
+            Timer _timer = new Timer(TimerCallback, new object(), 100, 100);
         }
 
-        private void _TimerCallback(object state)
+        private void TimerCallback(object state)
         {
             foreach (var child in _root.Children)
             {
