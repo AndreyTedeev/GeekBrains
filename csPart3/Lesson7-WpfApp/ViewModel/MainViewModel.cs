@@ -12,10 +12,10 @@ using Microsoft.EntityFrameworkCore;
 using System;
 
 namespace WpfApp.ViewModel {
+    
     public class MainViewModel : ViewModelBase {
 
 
-        /**/
         #region Commands 
 
         private ICommand _cmdSelectTabIndex;
@@ -206,12 +206,12 @@ namespace WpfApp.ViewModel {
 
         #region Email and Schedule Commands
         private ICommand _cmdSendEmail;
-        public ICommand SendEmailCommand =>
-            _cmdSendEmail ??= new AsyncCommand(SendEmailAsync,
-                (p) => SelectedServer != null
-                    && SelectedSender != null
-                    && SelectedRecipient != null
-                    && SelectedEmail != null);
+        public ICommand SendEmailCommand => _cmdSendEmail ??= new AsyncCommand(
+            Execute: SendEmailAsync,
+            CanExecute: (p) => SelectedServer is not null
+                               && SelectedSender is not null
+                               && SelectedRecipient is not null
+                               && SelectedEmail is not null);
 
         private async Task SendEmailAsync() {
             try {
@@ -226,12 +226,12 @@ namespace WpfApp.ViewModel {
         }
 
         private ICommand _cmdScheduleEmail;
-        public ICommand ScheduleEmailCommand =>
-            _cmdScheduleEmail ??= new AsyncCommand(ScheduleEmailAsync,
-                (p) => SelectedServer != null
-                    && SelectedSender != null
-                    && SelectedRecipient != null
-                    && SelectedEmail != null);
+        public ICommand ScheduleEmailCommand => _cmdScheduleEmail ??= new AsyncCommand(
+            Execute: ScheduleEmailAsync,
+            CanExecute: (p) => SelectedServer is not null
+                               && SelectedSender is not null
+                               && SelectedRecipient is not null
+                               && SelectedEmail is not null);
 
         private async Task ScheduleEmailAsync() {
             var schedule = new Schedule {
